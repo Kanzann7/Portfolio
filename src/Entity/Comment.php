@@ -10,6 +10,8 @@ class Comment
     private DateTimeImmutable $createdAt;
     private string $content;
     private string $pseudo;
+    private string $usersId;
+    private string $portfolioId;
 
     public function __construct(array $data = [])
     {
@@ -20,6 +22,8 @@ class Comment
             }
         }
     }
+
+
 
     /**
      * Get the value of id
@@ -89,6 +93,42 @@ class Comment
     public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of usersId
+     */
+    public function getUsersId(): string
+    {
+        return $this->usersId;
+    }
+
+    /**
+     * Set the value of usersId
+     */
+    public function setUsersId(string $usersId): self
+    {
+        $this->usersId = $usersId;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of portfolioId
+     */
+    public function getPortfolioId(): string
+    {
+        return $this->portfolioId;
+    }
+
+    /**
+     * Set the value of portfolioId
+     */
+    public function setPortfolioId(string $portfolioId): self
+    {
+        $this->portfolioId = $portfolioId;
 
         return $this;
     }
