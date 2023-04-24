@@ -14,7 +14,6 @@ if ($path == "") {
     $path = "/";
 }
 
-
 // Routing
 switch ($path) {
     case '/';
@@ -25,6 +24,15 @@ switch ($path) {
         break;
     case '/inscription';
         require '../controllers/inscription.php';
+        break;
+
+    case '/mentions-legales';
+        require '../controllers/mentionsLegales.php';
+        break;
+
+    case '/comments';
+        require '../controllers/comments.php';
+        break;
 
     default:
         http_response_code(404);

@@ -17,8 +17,8 @@ class UserModel extends AbstractModel
         $users = [];
         foreach ($results as $result) {
             $users[] = new User($result);
-            return $users;
         }
+        return $users;
     }
 
     function getOneUser(int $idUser)
@@ -29,7 +29,17 @@ class UserModel extends AbstractModel
         $users = [];
         foreach ($results as $result) {
             $users[] = new User($result);
-            return $users;
         }
+        return $users;
+    }
+
+
+    function addUser(string $pseudo, string $email, string $password)
+    {
+        $sql = 'INSERT INTO users
+        (pseudo, email, password)
+        VALUES (?,?,?)';
+
+        $this->db->prepareAndExecute($sql, [$pseudo, $email, $password]);
     }
 }

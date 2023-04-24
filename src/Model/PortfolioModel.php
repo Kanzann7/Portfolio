@@ -16,8 +16,8 @@ class PortfolioModel extends AbstractModel
         $portfolio = [];
         foreach ($results as $result) {
             $portfolio[] = new Portfolio($result);
-            return $portfolio;
         }
+        return $portfolio;
     }
 
     function getOnePortfolio(int $idPortfolio)
@@ -28,7 +28,7 @@ class PortfolioModel extends AbstractModel
         $portfolio = [];
         foreach ($results as $result) {
             $portfolio[] = new Portfolio($result);
-            return $portfolio;
         }
+        return $portfolio;
     }
 }

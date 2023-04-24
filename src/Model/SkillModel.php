@@ -17,8 +17,8 @@ class SkillModel extends AbstractModel
         $skills = [];
         foreach ($results as $result) {
             $skills[] = new Skill($result);
-            return $skills;
         }
+        return $skills;
     }
 
     function getOneSkill(int $idSkill)
@@ -29,7 +29,7 @@ class SkillModel extends AbstractModel
         $skills = [];
         foreach ($results as $result) {
             $skills[] = new Skill($result);
-            return $skills;
         }
+        return $skills;
     }
 }

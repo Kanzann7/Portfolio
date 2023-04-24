@@ -1,18 +1,18 @@
-<form>
+<form action="inscription.php" method="POST">
     <div class="form-group">
-        <label for="exampleInputEmail1">Votre email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Veuillez entrer votre email">
+        <label for="exampleInputEmail1" class="connexion-text">Votre email</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="email" aria-describedby="emailHelp" placeholder="Veuillez entrer votre email">
 
     </div>
 
     <div class="form-group">
-        <label for="exampleInputEmail1">Votre pseudo</label>
-        <input type="text" class="form-control" id="exampleInputText1" aria-describedby="PseudoHelp" placeholder="Votre pseudp">
+        <label for="exampleInputText1" class="connexion-text">Votre pseudo</label>
+        <input type="text" class="form-control" id="exampleInputText1" name="pseudo" placeholder="pseudo" aria-describedby="PseudoHelp" placeholder="Votre pseudo">
 
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Votre mot de passe</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe">
+        <label for="exampleInputPassword1" class="connexion-text">Votre mot de passe</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Votre mot de passe">
     </div>
-    <button type="submit" class="btn btn-primary">Envoyer</button>
+    <button type="submit" class="btn btn-primary" name="submit">S'inscrire</button>
 </form>
