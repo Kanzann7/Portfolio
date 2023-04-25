@@ -18,7 +18,7 @@ class CommentModel extends AbstractModel
     function getCommentsByPortfolioId(int $idPortfolio)
     {
         $sql = 'SELECT *
-               FROM comment
+               FROM comments
                WHERE portfolioId = ?
                ORDER BY createdAt DESC';
         $results = $this->db->getAllResults($sql, [$idPortfolio]);
@@ -32,7 +32,7 @@ class CommentModel extends AbstractModel
     function getCommentsByUsersId(int $idUsers)
     {
         $sql = 'SELECT *
-               FROM comment
+               FROM comments
                WHERE usersId = ?
                ORDER BY createdAt DESC';
         $results = $this->db->getAllResults($sql, [$idUsers]);

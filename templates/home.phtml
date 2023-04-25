@@ -197,59 +197,26 @@
 
     <!--PORTFOLIO-->
 
-    <div id="portfolio-main">
-        <h1>PORTFOLIO</h1>
+    <article>
 
-        <div class="portfolio-block">
+        <div id="portfolio-main">
+            <h1>PORTFOLIO</h1>
 
-            <div class="business ensemble-portfolio">
-                <img src="./Images/business co.png" alt="photo du site web coop" class="portfolio-main-img">
-                <p>Exercice réalisé en groupe dans le cadre <br> d’un cours sur le responsive</p>
-
-                <a href="https://kanzann7.github.io/Business-Co/" target="_blank">
-                    <div class="boutton">
-                        <img src="./Images/souris modif.png" alt="image de souris" class="souris">
-                        <p class="portfolio-txt">Cliquer ici pour voir le site</p>
-                    </div>
-                </a>
-                <?php foreach ($comments as $comment) : ?>
-                    <a href="<?= constructUrl('comments', ['id' => $comment->getId()]); ?>">
-                        <p class="portfolio-txt">Cliquer ici pour voir les commentaires</p>
+            <div class="portfolio-block">
+                <?php foreach ($portfolios as $portfolio) : ?>
+                    {
+                    <img src="<?= asset('images/' . $portfolio->getImage()) ?>" class="portfolio-main-img">
+                    <p class="portfolio-txt"><?= $portfolio->getContent() ?></p>
+                    <a href="<?= constructUrl('/comments', ['id' => $portfolio->getId()]); ?>" target="_blank">
+                        <p>Cliquez ici pour voir les commentaires</p>
                     </a>
-                <?php endforeach; ?>
 
+                    }
+                <?php endforeach ?>
             </div>
-            <div class="formulaire ensemble-portfolio">
-                <img src="./Images/formulaire.png" alt="photo d'un formulaire" class="portfolio-main-img">
-                <p>Exercice réalisé en groupe dans le cadre <br> d’un cours sur les regex</p>
-
-                <a href="https://kanzann7.github.io/exercice-FormulaireJS/" target="_blank">
-                    <div class="boutton">
-                        <img src="./Images/souris modif.png" alt="image de souris" class="souris">
-                        <p class="portfolio-txt">Cliquer ici pour voir le site</p>
-                    </div>
-                </a>
-                <p class="portfolio-txt">Cliquer ici pour voir les commentaires</p>
-
-            </div>
-
-            <div class="industrious ensemble-portfolio">
-                <img src="./Images/industrious.png" alt="photo du site web coop" class="portfolio-main-img industrious-img">
-                <p class="portfolio-txt">Exercice réalisé en groupe dans le cadre <br> d’un cours sur les display flex</p>
-                <a href="https://kanzann7.github.io/Industrious/" target="_blank">
-                    <div class="boutton">
-                        <img src="./Images/souris modif.png" alt="image de souris" class="souris">
-                        <p>Cliquer ici pour voir le site</p>
-                    </div>
-                </a>
-                <p class="portfolio-txt">Cliquer ici pour voir les commentaires</p>
-
-            </div>
-
         </div>
 
-    </div>
-
+    </article>
 
     <!--PROJETS FUTURS-->
 

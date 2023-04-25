@@ -15,3 +15,16 @@ function constructUrl(string $path, array $params = [])
     }
     return $url;
 }
+
+
+function validateCommentForm(string $pseudo, string $comment)
+{
+    $errors = [];
+    if (empty($pseudo)) {
+        $errors['pseudo'] = "Le champ est vide !";
+    }
+    if (empty($comment)) {
+        $errors['comment'] = "Le champ est vide";
+    }
+    return $errors;
+}

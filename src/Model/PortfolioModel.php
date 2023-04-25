@@ -23,12 +23,13 @@ class PortfolioModel extends AbstractModel
     function getOnePortfolio(int $idPortfolio)
     {
         $sql = 'SELECT *
-                FROM portfolio';
-        $results = $this->db->getOneResult($sql, [$idPortfolio]);
-        $portfolio = [];
-        foreach ($results as $result) {
-            $portfolio[] = new Portfolio($result);
-        }
+                FROM portfolio
+                WHERE id = ?';
+        $result = $this->db->getOneResult($sql, [$idPortfolio]);
+
+
+        $portfolio = new Portfolio($result);
+
         return $portfolio;
     }
 }
