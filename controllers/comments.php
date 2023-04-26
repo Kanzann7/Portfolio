@@ -9,7 +9,7 @@ use App\Model\PortfolioModel;
 
 if (!array_key_exists('id', $_GET) || !$_GET['id'] || !ctype_digit($_GET['id'])) {
     http_response_code(404);
-    echo 'Article introuvable';
+    echo 'Commentaires introuvable';
     exit; // End PHP script
 }
 
@@ -36,8 +36,8 @@ if (!empty($_POST)) {
         //message flash
         $_SESSION['flashbag'] = "Votre commentaire a bien été ajouté";
 
-        //Redirection vers la page article 
-        header('Location: ' . constructUrl('comments', ['id' => $idPortfolio]));
+        //Redirection vers la page comments
+        header('Location: ' . constructUrl('/comments', ['id' => $idPortfolio]));
         exit;
     }
 }

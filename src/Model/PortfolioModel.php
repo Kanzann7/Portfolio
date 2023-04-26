@@ -27,7 +27,9 @@ class PortfolioModel extends AbstractModel
                 WHERE id = ?';
         $result = $this->db->getOneResult($sql, [$idPortfolio]);
 
-
+        if (!$result) {
+            return null;
+        }
         $portfolio = new Portfolio($result);
 
         return $portfolio;

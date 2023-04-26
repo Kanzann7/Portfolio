@@ -205,11 +205,19 @@
             <div class="portfolio-block">
                 <?php foreach ($portfolios as $portfolio) : ?>
                     {
-                    <img src="<?= asset('images/' . $portfolio->getImage()) ?>" class="portfolio-main-img">
-                    <p class="portfolio-txt"><?= $portfolio->getContent() ?></p>
-                    <a href="<?= constructUrl('/comments', ['id' => $portfolio->getId()]); ?>" target="_blank">
-                        <p>Cliquez ici pour voir les commentaires</p>
-                    </a>
+                    <div class="ensemble-portfolio">
+                        <img src="<?= asset('images/' . $portfolio->getImage()) ?>" class="portfolio-main-img">
+                        <div class="ensemble-non-img">
+                            <p class="portfolio-txt"><?= $portfolio->getContent() ?></p>
+                            <a href="<?= constructUrl('/comments', ['id' => $portfolio->getId()]); ?>" target="_blank">
+                                <div class="boutton">
+                                    <img src="<?= asset('images/souris modif.png') ?>" alt="image de souris" class="souris">
+                                    <p class="portfolio-txt">Cliquez ici pour voir les commentaires</p>
+                                </div>
+
+                            </a>
+                        </div>
+                    </div>
 
                     }
                 <?php endforeach ?>
