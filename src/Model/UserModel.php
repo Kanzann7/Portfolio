@@ -24,12 +24,14 @@ class UserModel extends AbstractModel
     function getOneUser(int $idUser)
     {
         $sql = 'SELECT *
-                FROM users';
-        $results = $this->db->getOneResult($sql, [$idUser]);
-        $users = [];
-        foreach ($results as $result) {
-            $users[] = new User($result);
+                FROM users
+                WHERE id = ?';
+        $result = $this->db->getOneResult($sql, [$idUser]);
+        if (!$result) {
+            return null;
         }
+
+        $users = new User($result);
         return $users;
     }
 
@@ -41,5 +43,32 @@ class UserModel extends AbstractModel
         VALUES (?,?,?)';
 
         $this->db->prepareAndExecute($sql, [$pseudo, $email, $password]);
+    }
+
+    function emailExists($email)
+    {
+
+        $sql = 'SELECT *
+                FROM users
+                WHERE email = ?';
+        $result = $this->db->getOneResult($sql, [$email]);
+
+        if ($result) {
+            return true;
+        }
+        return false;
+    }
+    function getUserByEmail($email)
+    {
+
+        $sql = 'SELECT *
+                FROM users
+                WHERE email = ?';
+        $result = $this->db->getOneResult($sql, [$email]);
+
+        if ($result) {
+            return $result;
+        }
+        return [];
     }
 }

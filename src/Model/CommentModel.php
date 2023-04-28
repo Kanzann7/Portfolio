@@ -7,12 +7,12 @@ use App\Entity\Comment;
 
 class CommentModel extends AbstractModel
 {
-    function addComment(int $content, string $pseudo, int $usersId, int $portfolioId)
+    function addComment(string $content, int $usersId, int $portfolioId)
     {
         $sql = 'INSERT INTO comments
-        (content, pseudo, usersId, createdAt)
-        VALUES (?,?,?, NOW())';
-        $this->db->prepareAndExecute($sql, [$content, $pseudo, $usersId, $portfolioId]);
+        (content, usersId, createdAt, portfolioId)
+        VALUES (?,?, NOW(), ?)';
+        $this->db->prepareAndExecute($sql, [$content, $usersId, $portfolioId]);
     }
 
     function getCommentsByPortfolioId(int $idPortfolio)

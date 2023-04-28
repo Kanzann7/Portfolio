@@ -54,8 +54,11 @@ class Comment
     /**
      * Set the value of createdAt
      */
-    public function setCreatedAt(DateTimeImmutable $createdAt): self
+    public function setCreatedAt(string|DateTimeImmutable $createdAt): self
     {
+        if (is_string($createdAt)) {
+            $createdAt = new DateTimeImmutable($createdAt);
+        }
         $this->createdAt = $createdAt;
 
         return $this;

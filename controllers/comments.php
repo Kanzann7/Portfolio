@@ -26,13 +26,14 @@ if (!$portfolioId) {
 
 
 if (!empty($_POST)) {
-    $pseudo = $_POST['pseudo'];
+
     $comment = $_POST['comment'];
 
-    $errors = validateCommentForm($pseudo, $comment);
+    $errors = validateCommentForm($comment);
+    $usersId = $_SESSION['user']['userId'];
 
     if (!$errors) {
-        $commentId = $commentModel->addComment($pseudo, $comment, $idPortfolio, $usersId);
+        $commentModel->addComment($comment, $usersId, $idPortfolio,);
         //message flash
         $_SESSION['flashbag'] = "Votre commentaire a bien été ajouté";
 

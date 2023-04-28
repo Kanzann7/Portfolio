@@ -10,7 +10,10 @@ $portfolios = $portfolioModel->getAllPortfolio();
 $skillModel = new SkillModel;
 $skills = $skillModel->getAllSkills();
 
-
+if (isset($_SESSION['flash'])) {
+    $message =  $_SESSION['flash'];
+    $_SESSION['flash'] = null;
+}
 
 
 

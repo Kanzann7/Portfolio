@@ -1,9 +1,10 @@
-<form action="connexion.php" method="POST">
+<form action="<?= constructUrl('/connexion') ?>" method="POST">
     <div class="form-div">
         <div class="form-group">
             <label for="exampleInputEmail1" class="connexion-text">Votre email</label>
             <input type="text" class="form-control" id="exampleInputEmail1" name="email" placeholder="email@boitemail.fr" aria-describedby="emailHelp">
         </div>
+
 
         <div class="form-group">
             <label for="exampleInputText1" class="connexion-text">Votre pseudo</label>
@@ -15,6 +16,13 @@
             <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Votre mot de passe">
         </div>
 
+        <?php if (isset($errors)) : ?>
+            {
+            <small class="text-errors"><?= $errors ?></small>
+            }
+        <?php endif ?>
+
         <button type="submit" class="btn btn-primary" name="submit" value="submit">Se connecter</button>
     </div>
+
 </form>

@@ -24,12 +24,14 @@ class SkillModel extends AbstractModel
     function getOneSkill(int $idSkill)
     {
         $sql = 'SELECT *
-                FROM skills';
-        $results = $this->db->getOneResult($sql, [$idSkill]);
-        $skills = [];
-        foreach ($results as $result) {
-            $skills[] = new Skill($result);
+                FROM skills
+                WHERE id = ?';
+        $result = $this->db->getOneResult($sql, [$idSkill]);
+        if (!$result) {
+            return null;
         }
+
+        $skills = new Skill($result);
         return $skills;
     }
 }

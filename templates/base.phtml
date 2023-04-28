@@ -13,6 +13,15 @@
 </head>
 
 <body>
+
+    <?php if (isset($message)) : ?>
+
+        <p> <?= $message ?> </p>
+
+
+    <?php endif ?>
+
+
     <?php include $template . '.phtml'; ?>
 </body>
 

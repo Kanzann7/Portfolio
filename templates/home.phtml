@@ -14,14 +14,14 @@
     <div id="nav-bar">
         <div class="sauf-menu">
             <h1>BIENVENUE</h1>
-            <img src="./Images/Accueil.png" alt="image de d10" class="d10">
+            <img src="<?= asset("images/Accueil.png") ?>" alt="image de d10" class="d10">
             <h1>AVENTURIER·E</h1>
         </div>
         <div class="menu">
             <h1 class="menu-titre">MENU</h1>
             <div class="buttons">
-                <img src="./Images/play.png" alt="boutton play" class="play">
-                <img src="./Images/pause.png" alt="boutton pause" class="pause">
+                <img src="<?= asset('images/play.png') ?>" alt="boutton play" class="play">
+                <img src="<?= asset('images/pause.png') ?>" alt="boutton pause" class="pause">
             </div>
 
 
@@ -34,13 +34,13 @@
 
     <!--NAV BAR POST CLICK-->
     <div class="nav-bar-postclick">
-        <img src="./Images/Accueil.png" alt="image de d10" class="d10-caché">
+        <img src="<?= asset("images/Accueil.png") ?>" alt="image de d10" class="d10-caché">
 
 
 
         <div class="profil">
             <a href="#profil-description">
-                <img src="./Images/profil modif.png" alt="image de profil" class="profil-img">
+                <img src="<?= asset('images/profil modif.png') ?>" alt="image de profil" class="profil-img">
             </a>
             <a href="#profil-description">
                 <h2 class="titres-navbar-postclick">PROFIL</h2>
@@ -49,7 +49,7 @@
         </div>
         <div class="compétences">
             <a href="#compétences-main">
-                <img src="./Images/compétences modif.png" alt="image de compétences" class="compétences-img">
+                <img src="<?= asset('images/compétences modif.png') ?>" alt="image de compétences" class="compétences-img">
             </a>
             <a href="#compétences-main">
                 <h2 class="titres-navbar-postclick">COMPETENCES</h2>
@@ -58,7 +58,7 @@
         </div>
         <div class="portfolio">
             <a href="#portfolio-main">
-                <img src="./Images/portfolio modif.png" alt="image de portfolio" class="portfolio-img">
+                <img src=" <?= asset('images/portfolio modif.png') ?>" alt="image de portfolio" class="portfolio-img">
             </a>
             <a href="#portfolio-main">
                 <h2 class="titres-navbar-postclick">PORTFOLIO</h2>
@@ -66,7 +66,7 @@
         </div>
         <div class="projets-futurs">
             <a href="#projets-futurs-main">
-                <img src="./Images/projets futurs modif.png" alt="image de forge" class="projets-futurs-img">
+                <img src=" <?= asset('images/projets futurs modif.png') ?>" alt="image de forge" class="projets-futurs-img">
             </a>
             <a href="#projets-futurs-main">
                 <h2 class="titres-navbar-postclick">PROJETS FUTURS</h2>
@@ -75,7 +75,7 @@
         </div>
         <div class="contact">
             <a href="#footer">
-                <img src="./Images/contact modif.png" alt="image de parchemin" class="contact-img">
+                <img src=" <?= asset('images/contact modif.png') ?>" alt="image de parchemin" class="contact-img">
             </a>
             <a href="#footer">
                 <h2 class="titres-navbar-postclick">Contact</h2>
@@ -93,7 +93,7 @@
         </div>
 
         <div class="partie-droite">
-            <img src="./Images/avatar 2 pixel art-fococlipping-standard.png" alt="image de moi pixel art" class="avatar">
+            <img src="<?= asset('images/avatar 2 pixel art-fococlipping-standard.png') ?>" alt="image de moi pixel art" class="avatar">
         </div>
 
 
@@ -124,7 +124,7 @@
             </p>
 
             <div class="cv-pdf">
-                <a href="./CV.pdf" download="CV.pdf" target="_blank"><img src="./Images/pdf1.png" alt="image de pdf" class="pdf"></a>
+                <a href="./CV.pdf" download="CV.pdf" target="_blank"><img src="<?= asset('images/pdf1.png" alt="image de pdf') ?>" class="pdf"></a>
                 <h1 class="cv-text">CV</h1>
             </div>
 
@@ -134,7 +134,7 @@
 
         <div class="profil-droite">
             <div class="jeu-vidéo">
-                <img src="./Images/jeu vidéo modif.png" alt="image de manette" class="jeu-vidéo-img">
+                <img src="<?= asset('images/jeu vidéo modif.png') ?>" alt="image de manette" class="jeu-vidéo-img">
                 <div class="sauf-manette">
                     <h2>JEU VIDEO</h2>
                     <p>Joueur invétéré sur différentes consoles mais <br>
@@ -145,7 +145,7 @@
 
             </div>
             <div class="écriture">
-                <img src="./Images/écriture modif.png" alt="image de crayon" class="écriture-img">
+                <img src="<?= asset('images/écriture modif.png') ?>" alt="image de crayon" class="écriture-img">
                 <div class="sauf-crayon">
                     <h2>ECRITURE</h2>
                     <p> Auteur de deux livres publiés, je ne cesse d’élaborer divers <br>
@@ -158,7 +158,7 @@
 
             </div>
             <div class="musique">
-                <img src="./Images/musique modif.png" alt="image de basse" class="musique-img">
+                <img src="<?= asset('images/musique modif.png') ?>" alt="image de basse" class="musique-img">
                 <div class="sauf-basse">
                     <h2>MUSIQUE</h2>
                     <p> Sur mon temps libre, je joue de la basse et compose divers <br>
@@ -234,13 +234,13 @@
         <div class="projets-futurs-block">
 
             <div class="site-web-projet">
-                <img src="./Images/site web.png" alt="image de site web" class="projet-img">
+                <img src="<?= asset('images/site web.png') ?>" alt="image de site web" class="projet-img">
                 <p>Un site web présentant mon univers de fiction et recensant tous ses médias : <br>
                     roman, jeu de rôle, jeu de plateau, jeu de cartes et prochainement jeu vidéo. <br>
                     Vous pouvez pour le moment suivre le développement de l’univers et du jeu <br> de
                     rôle en rejoignant mon discord. </p>
                 <a href="https://discord.gg/pdumPFYA" target="_blank">
-                    <img src="./Images/discord.png" alt="image de discord" class="projet-discord">
+                    <img src="<?= asset('images/discord.png') ?>" alt="image de discord" class="projet-discord">
                 </a>
 
 
@@ -248,7 +248,7 @@
             </div>
 
             <div class="jeu-vidéo-projet">
-                <img src="./Images/jeu plateforme.png" alt="jeu de plateforme" class="projet-img">
+                <img src="<?= asset('images/jeu plateforme.png') ?>" alt="jeu de plateforme" class="projet-img">
                 <p>Un jeu vidéo plateformer rpg basé sur mon univers médiéval fantasy où on <br>
                     incarnera le protagoniste de mon roman dans ses plus jeunes années.</p>
 
@@ -267,9 +267,9 @@
     <div class="api">
         <p>Vous êtes passé niveau 2 ! Cliquez sur le coffre pour recevoir votre récompense !</p>
         <h1>RPG ITEMS API</h1>
-        <img src="./Images/coffre fermé.png" alt="image de coffre fermé" class="item coffre-fermé">
+        <img src="<?= asset('images/coffre fermé.png') ?>" alt="image de coffre fermé" class="item coffre-fermé">
         <div class="récompense">
-            <img src="Images/coffre ouvert.png" alt="image de coffre ouvert" class="item">
+            <img src="<?= asset('images/coffre ouvert.png') ?>" alt="image de coffre ouvert" class="item">
             <h1 class="title-item"></h1>
             <h2 class="type-item"></h2>
             <h2 class="rarity-item"></h2>
@@ -287,16 +287,16 @@
 
     <div id="footer">
         <a href="https://www.linkedin.com/in/cl%C3%A9ment-joulin-291a63160/" target="_blank">
-            <img src="./Images/linkedin.png" alt="logo linkedin" class="logo-footer">
+            <img src="<?= asset('images/linkedin.png') ?>" alt="logo linkedin" class="logo-footer">
         </a>
         <a href="https://github.com/Kanzann7" target="_blank">
-            <img src="./Images/github.png" alt="logo github" class="logo-footer">
+            <img src="<?= asset('images/github.png') ?>" alt="logo github" class="logo-footer">
         </a>
         <a href="mailto:clemjoulin@hotmail.fr" target="_blank">
-            <img src="./Images/mail.png" alt="logo mail" class="logo-footer">
+            <img src="<?= asset('images/mail.png') ?>" alt="logo mail" class="logo-footer">
         </a>
         <div class="footer-discord">
-            <img src="./Images/discord.png" alt="logo discord" class="logo-footer">
+            <img src="<?= asset('images/discord.png') ?>" alt="logo discord" class="logo-footer">
             <p>Kanzan-acolyte pentacolore#7807</p>
         </div>
 
@@ -314,7 +314,7 @@
 
 
 <div class="flèche-statique">
-    <a href="#nav-bar"> <img src="./Images/flèche du haut.png" alt="image de flèche vers le bas">
+    <a href="#nav-bar"> <img src="<?= asset('images/flèche du haut.png') ?>" alt="image de flèche vers le bas">
     </a>
 
     <script src="<?= asset("js/app.js") ?>"></script>
