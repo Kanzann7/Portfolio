@@ -35,4 +35,11 @@
         </div>
     </form>
 
+    <?php foreach ($comments as $comment) : ?>
+        <div class="portfolio-txt">
+            <h2><?= $comment->getUser()->getPseudo(); ?> le <?= $comment->getFormattedCreatedAt() ?></h2>
+            <p><?= $comment->getContent(); ?></p>
+        </div>
+    <?php endforeach ?>
+
 </article>

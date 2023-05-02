@@ -32,6 +32,10 @@ if (!empty($_POST)) {
     $errors = validateCommentForm($comment);
     $usersId = $_SESSION['user']['userId'];
 
+
+
+
+
     if (!$errors) {
         $commentModel->addComment($comment, $usersId, $idPortfolio,);
         //message flash
@@ -44,6 +48,8 @@ if (!empty($_POST)) {
 }
 
 $comments = $commentModel->getCommentsByPortfolioId($idPortfolio);
+
+
 
 
 if (array_key_exists('flashbag', $_SESSION) && $_SESSION['flashbag']) {

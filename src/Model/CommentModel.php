@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Entity\User;
 use App\Core\AbstractModel;
 use App\Entity\Comment;
 
@@ -24,9 +25,13 @@ class CommentModel extends AbstractModel
         $results = $this->db->getAllResults($sql, [$idPortfolio]);
         $comments = [];
         foreach ($results as $result) {
-            $comments[] = new Comment($result);
-            return $comments;
+            $comment = new Comment($result);
+            $userModel = new UserModel();
+            $user = $userModel->getOneUser($result['usersId']);
+            $comment->setUser($user);
+            $comments[] = $comment;
         }
+        return $comments;
     }
 
     function getCommentsByUsersId(int $idUsers)

@@ -9,8 +9,7 @@ class Comment
     private int $id;
     private DateTimeImmutable $createdAt;
     private string $content;
-    private string $pseudo;
-    private string $usersId;
+    private User $user;
     private string $portfolioId;
 
     public function __construct(array $data = [])
@@ -82,38 +81,21 @@ class Comment
         return $this;
     }
 
-    /**
-     * Get the value of pseudo
-     */
-    public function getPseudo(): string
-    {
-        return $this->pseudo;
-    }
-
-    /**
-     * Set the value of pseudo
-     */
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
 
     /**
      * Get the value of usersId
      */
-    public function getUsersId(): string
+    public function getUser(): User
     {
-        return $this->usersId;
+        return $this->user;
     }
 
     /**
      * Set the value of usersId
      */
-    public function setUsersId(string $usersId): self
+    public function setUser(User $user): self
     {
-        $this->usersId = $usersId;
+        $this->user = $user;
 
         return $this;
     }
@@ -134,5 +116,10 @@ class Comment
         $this->portfolioId = $portfolioId;
 
         return $this;
+    }
+
+    public function getFormattedCreatedAt(): string
+    {
+        return $this->createdAt->format('d/m/Y') . ' à ' . $this->createdAt->format('H:i');
     }
 }
