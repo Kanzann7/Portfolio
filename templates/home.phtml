@@ -1,9 +1,15 @@
 <header>
     <div id="pre-nav">
         <div class="nav-connexion">
-            <a href="<?= constructUrl('/connexion'); ?>" target="_blank">
-                <h2>Connexion</h2>
-            </a>
+            <?php if (isConnected()) : ?>
+                <a href="<?= constructUrl('/deconnexion'); ?>" target="_blank">
+                    <h2>Déconnexion</h2>
+                </a>
+            <?php else : ?>
+                <a href="<?= constructUrl('/connexion'); ?>" target="_blank">
+                    <h2>Connexion</h2>
+                </a>
+            <?php endif ?>
             <a href="<?= constructUrl('/inscription'); ?>" target="_blank">
                 <h2>Inscription</h2>
             </a>

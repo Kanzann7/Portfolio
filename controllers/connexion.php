@@ -37,5 +37,11 @@ if (!empty($_POST)) {
     }
 }
 
+if (isset($_SESSION['flash'])) {
+    $message =  $_SESSION['flash'];
+    $_SESSION['flash'] = null;
+}
+
+
 $template = "connexion";
 include "../templates/base.phtml";

@@ -28,6 +28,13 @@ function validateCommentForm(string $comment)
     return $errors;
 }
 
+function isConnected(): bool
+{
+    /**
+     * @TODO Vérifier que la session à démarré
+     */
+    return array_key_exists('user', $_SESSION) && $_SESSION['user'];
+}
 
 
 function validateInscriptionForm(string $email, string $pseudo, string $password, string $passwordConfirm)

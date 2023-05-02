@@ -26,6 +26,10 @@ switch ($path) {
         require '../controllers/inscription.php';
         break;
 
+    case '/deconnexion';
+        require '../controllers/deconnexion.php';
+        break;
+
     case '/mentions-legales';
         require '../controllers/mentionsLegales.php';
         break;
