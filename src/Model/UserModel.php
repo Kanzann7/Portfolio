@@ -38,11 +38,12 @@ class UserModel extends AbstractModel
 
     function addUser(string $pseudo, string $email, string $password)
     {
+        $role = "user";
         $sql = 'INSERT INTO users
-        (pseudo, email, password)
-        VALUES (?,?,?)';
+        (pseudo, email, password, role)
+        VALUES (?,?,?, ?)';
 
-        $this->db->prepareAndExecute($sql, [$pseudo, $email, $password]);
+        $this->db->prepareAndExecute($sql, [$pseudo, $email, $password, $role]);
     }
 
     function emailExists($email)

@@ -8,6 +8,7 @@ class User
     private string $pseudo;
     private string $email;
     private string $password;
+    private string $role;
 
     public function __construct(array $data = [])
     {
@@ -87,6 +88,24 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of role
+     */
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    /**
+     * Set the value of role
+     */
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
