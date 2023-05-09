@@ -34,4 +34,22 @@ class SkillModel extends AbstractModel
         $skills = new Skill($result);
         return $skills;
     }
+
+    function addSkill(string $image, string $content)
+    {
+
+        $sql = 'INSERT INTO skills
+        (image, content)
+        VALUES (?,?)';
+
+        $this->db->prepareAndExecute($sql, [$image, $content]);
+    }
+
+    function removeSkill($id)
+    {
+        $sql = 'DELETE FROM skills
+                WHERE id = ?';
+
+        $this->db->prepareAndExecute($sql, [$id]);
+    }
 }

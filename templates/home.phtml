@@ -194,7 +194,9 @@
                 <img src='<?= asset("images/" . $skill->getImage()); ?>' class="logo">
 
             <?php endif; ?>
-            <h3><?= $skill->getContent(); ?></h3>
+            <?php if ($skill->getContent()) : ?>
+                <h3><?= $skill->getContent(); ?></h3>
+            <?php endif; ?>
 
 
         <?php endforeach ?>
@@ -210,7 +212,7 @@
 
             <div class="portfolio-block">
                 <?php foreach ($portfolios as $portfolio) : ?>
-                    {
+
                     <div class="ensemble-portfolio">
                         <img src="<?= asset('images/' . $portfolio->getImage()) ?>" class="portfolio-main-img">
                         <div class="ensemble-non-img">
@@ -225,7 +227,7 @@
                         </div>
                     </div>
 
-                    }
+
                 <?php endforeach ?>
             </div>
         </div>

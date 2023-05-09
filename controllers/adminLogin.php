@@ -17,19 +17,23 @@ if (!empty($_POST)) {
     $userModel = new UserModel();
     $user = $userModel->getUserByEmail($email);
 
-    // 1. Est-ce que les identifiants sont corrects ?
-    $user = checkCredentials($email, $password);
+    //Est-ce que les identifiants sont corrects ?
+    $user = checkCredentials($email, $pseudo, $password);
 
     if (!$user) {
         $errors = 'Identifiants incorrects';
     } else {
-        $userPassword = new User($user);
-        $passwordHash = $userPassword->getPassword();
-        $userRole = $userPassword->getRole();
+        $userCredentials = new User($user);
+        $userPseudo = $userCredentials->getPseudo();
+        $passwordHash = $userCredentials->getPassword();
+        $userRole = $userCredentials->getRole();
 
-        if (!$userRole == "user") {
+        // Checking role
+
+        if ($userRole == "user") {
             $errors = "Vous n'êtes pas autorisé à consulter cette page !";
         }
+
 
         if ($errors == null) {
 
@@ -37,14 +41,15 @@ if (!empty($_POST)) {
             $_SESSION['user'] = [
                 'email' => $user['email'],
                 'pseudo' => $user['pseudo'],
-                'userId' => $user['id']
+                'userId' => $user['id'],
+                'role' => $user['role']
             ];
 
             // Message flash de succès
-            $_SESSION['flash'] = 'Content de te revoir ' . $user['pseudo'];
+
 
             // Redirection vers la page d'accueil
-            header('Location: ' . constructUrl('/'));
+            header('Location: ' . constructUrl('/adminMenu'));
             exit;
         }
     }

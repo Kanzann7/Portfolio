@@ -34,4 +34,22 @@ class PortfolioModel extends AbstractModel
 
         return $portfolio;
     }
+
+    function addPortfolio(string $image, string $content)
+    {
+
+        $sql = 'INSERT INTO portfolio
+        (image, content)
+        VALUES (?,?)';
+
+        $this->db->prepareAndExecute($sql, [$image, $content]);
+    }
+
+    function removePortfolio($id)
+    {
+        $sql = 'DELETE FROM portfolio
+                WHERE id = ?';
+
+        $this->db->prepareAndExecute($sql, [$id]);
+    }
 }

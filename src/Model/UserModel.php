@@ -72,4 +72,18 @@ class UserModel extends AbstractModel
         }
         return [];
     }
+
+    function getUserByPseudo($pseudo)
+    {
+
+        $sql = 'SELECT *
+                FROM users
+                WHERE pseudo = ?';
+        $result = $this->db->getOneResult($sql, [$pseudo]);
+
+        if ($result) {
+            return $result;
+        }
+        return [];
+    }
 }

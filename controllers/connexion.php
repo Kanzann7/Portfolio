@@ -12,7 +12,7 @@ if (!empty($_POST)) {
     $password = $_POST['password'];
 
     // 1. Est-ce que les identifiants sont corrects ?
-    $user = checkCredentials($email, $password);
+    $user = checkCredentials($email, $pseudo, $password);
 
     if (!$user) {
         $errors = 'Identifiants incorrects';

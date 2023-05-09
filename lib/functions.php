@@ -61,12 +61,40 @@ function validateInscriptionForm(string $email, string $pseudo, string $password
     return $errors;
 }
 
+function validateSkillForm(string $image, string $content)
+{
+    $errors = [];
 
-function checkCredentials($email, $password)
+    if (empty($image) && empty($content)) {
+        $errors = 'Veuillez remplir au moins un des champs !';
+    }
+    return $errors;
+}
+
+function validatePortfolioForm(string $image, string $content)
+{
+    $errors = [];
+
+    if (empty($image) || empty($content)) {
+        $errors = "Vous devez remplir ces deux champs !";
+    }
+    return $errors;
+}
+
+
+
+
+function checkCredentials($email, $pseudo, $password)
 {
     $userModel = new UserModel();
 
     $user = $userModel->getUserByEmail($email);
+
+    if (!$user) {
+        return false;
+    }
+
+    $user = $userModel->getUserByPseudo($pseudo);
 
     if (!$user) {
         return false;

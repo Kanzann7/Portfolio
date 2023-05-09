@@ -1,0 +1,154 @@
+<div id="admin-super-box">
+    <div id="admin-skill-box">
+
+
+
+        <div class="admin-box">
+            <h2>Ajouter une compétence</h2>
+            <form action="<?= constructUrl('/adminMenu') ?>" method="POST">
+                <div class="form-div">
+
+                    <div class="form-group">
+
+                        <label for="exampleInputEmail1" class="connexion-text">Votre image</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="imageSkill" aria-describedby="emailHelp">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="exampleInputText1" class="connexion-text">Votre texte</label>
+                        <textarea type="text" class="form-control" id="exampleInputText1" name="contentSkill" aria-describedby="PseudoHelp" placeholder="La compétence" value="<?= $content ?>"></textarea>
+                    </div>
+
+
+
+                    <?php if (isset($errors)) : ?>
+
+                        <small class="text-errors"><?= $errors ?></small>
+
+                    <?php endif ?>
+
+                    <button type="submit" class="btn btn-primary" name="addSubmitSkill" value="submit">Ajouter</button>
+                </div>
+
+            </form>
+
+
+
+        </div>
+
+        <div class="admin-box">
+            <h2>Supprimer une compétence</h2>
+            <form action="<?= constructUrl('/adminMenu') ?>" method="POST">
+                <div class="form-div-delete-skill">
+                    <?php foreach ($skills as $skill) : ?>
+                        <?php if ($skill->getImage()) : ?>
+                            <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
+
+                            <img src='<?= asset("images/" . $skill->getImage()); ?>' class="logo">
+                            <button type="submit" class="btn btn-primary" name="removeSubmitSkill" value="submit">Supprimer</button>
+
+                        <?php endif; ?>
+                        <?php if ($skill->getContent()) : ?>
+                            <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
+                            <h3><?= $skill->getContent(); ?></h3>
+                            <button type="submit" class="btn btn-primary" name="removeSubmitSkill<?= $skill->getId() ?>" value="submit">Supprimer</button>
+                        <?php endif; ?>
+
+
+
+                    <?php endforeach ?>
+
+
+
+
+
+
+
+
+                </div>
+
+            </form>
+
+
+
+        </div>
+
+    </div>
+
+
+    <div id="admin-portfolio-box">
+
+
+
+        <div class="admin-box">
+            <h2>Ajouter un portfolio</h2>
+            <form action="<?= constructUrl('/adminMenu') ?>" method="POST">
+                <div class="form-div">
+
+                    <div class="form-group">
+
+                        <label for="exampleInputEmail1" class="connexion-text">Votre image</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="imagePortfolio" aria-describedby="emailHelp">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="exampleInputText1" class="connexion-text">Votre texte</label>
+                        <textarea type="text" class="form-control" id="exampleInputText1" name="contentPortfolio" aria-describedby="PseudoHelp" placeholder="La compétence" value="<?= $content ?>"></textarea>
+                    </div>
+
+
+
+                    <?php if (isset($errors)) : ?>
+
+                        <small class="text-errors"><?= $errors ?></small>
+
+                    <?php endif ?>
+
+                    <button type="submit" class="btn btn-primary" name="addSubmitPortfolio" value="submit">Ajouter</button>
+                </div>
+
+            </form>
+
+
+
+        </div>
+
+        <div class="admin-box">
+            <h2>Supprimer un portfolio</h2>
+            <form action="<?= constructUrl('/adminMenu') ?>" method="POST">
+                <div class="form-div-delete-portfolio">
+
+                    <?php foreach ($portfolios as $portfolio) : ?>
+
+                        <div class="ensemble-portfolio">
+                            <input type="hidden" name="<?= $portfolio->getId() ?>" value="<?= $portfolio->getId() ?>">
+
+                            <img src="<?= asset('images/' . $portfolio->getImage()) ?>" class="portfolio-main-img">
+                            <div class="ensemble-non-img">
+                                <p class="portfolio-txt"><?= $portfolio->getContent() ?></p>
+
+
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="removeSubmitPortfolio<?= $portfolio->getId() ?>" value="submit">Supprimer</button>
+
+
+                    <?php endforeach ?>
+                </div>
+
+
+
+
+
+        </div>
+
+        </form>
+
+
+
+    </div>
+
+</div>
+</div>
