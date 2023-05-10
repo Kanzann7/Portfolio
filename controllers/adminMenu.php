@@ -72,37 +72,59 @@ foreach ($skills as $skill) {
     }
 }
 
-
 /* PORTFOLIO */
+
 
 $imagePortfolio = '';
 $contentPortfolio = '';
 $portfolioModel = new PortfolioModel();
 $portfolios = $portfolioModel->getAllPortfolio();
 
-/* ADD PORTFOLIO */
+/* ADD PORTFOLIOS */
 
 if (isset($_POST['addSubmitPortfolio'])) {
 
-
-    $imagePortfolio = trim($_POST['imagePortfolio']);
     $contentPortfolio = trim($_POST['contentPortfolio']);
 
     $errors = validatePortfolioForm($imagePortfolio, $contentPortfolio);
 
+
+
+
     if (empty($errors)) {
-        $portfolioModel->addPortfolio($imagePortfolio, $contentPortfolio);
-        $_SESSION['flash'] = 'Portfolio ajouté !';
+
+
+        $filename = '';
+
+        if (array_key_exists('imagePortfolio', $_FILES) && $_FILES['imagePortfolio']['error'] != UPLOAD_ERR_NO_FILE) {
+
+            // Nettoyer le nom du fichier
+            $extension = pathinfo($_FILES['imagePortfolio']['name'], PATHINFO_EXTENSION);
+            $basename = pathinfo($_FILES['imagePortfolio']['name'], PATHINFO_FILENAME);
+
+            // Slugification du nom du fichier (on supprime caractères spéciaux, accents, majuscules, espaces, etc)
+            $basename = slugify($basename);
+
+            // On ajoute une chaîne aléatoire pour éviter les conflits
+            $filename = $basename . sha1(uniqid(rand(), true)) . '.' . $extension;
+
+            // Copier le fichier temporaire dans notre dossier "images"
+            if (!file_exists('images')) {
+                mkdir('images');
+            }
+
+            move_uploaded_file($_FILES['imagePortfolio']['tmp_name'], 'images/' . $filename);
+        }
+        $portfolioModel->addPortfolio($filename, $contentPortfolio);
+        $_SESSION['flash'] = 'Compétence ajoutée !';
         header('Location: ' . constructUrl('/adminMenu'));
         exit;
     }
 }
 
-/* REMOVE PORTFOLIO */
-
+/* REMOVE SKILLS */
 foreach ($portfolios as $portfolio) {
     if (isset($_POST['removeSubmitPortfolio' . $portfolio->getId()])) {
-
 
         $portfolioModel->removePortfolio($portfolio->getId());
         $_SESSION['flash'] = 'Portfolio retiré !';
@@ -110,8 +132,6 @@ foreach ($portfolios as $portfolio) {
         exit;
     }
 }
-
-
 
 
 

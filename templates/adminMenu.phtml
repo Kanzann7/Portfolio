@@ -58,7 +58,7 @@
                         <?php endif; ?>
 
 
-                        <button type="submit" class="btn btn-primary" name="removeSubmitSkill" value="submit">Supprimer</button>
+                        <button type="submit" class="btn btn-primary" name="removeSubmitSkill<?= $skill->getId() ?>" value="submit">Supprimer</button>
                     <?php endforeach ?>
 
 
@@ -85,33 +85,29 @@
 
         <div class="admin-box">
             <h2>Ajouter un portfolio</h2>
-            <form action="<?= constructUrl('/adminMenu') ?>" method="POST">
+            <form action="<?= constructUrl('/adminMenu') ?>" enctype="multipart/form-data" method="POST">
                 <div class="form-div">
 
                     <div class="form-group">
 
                         <label for="exampleInputEmail1" class="connexion-text">Votre image</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="imagePortfolio" aria-describedby="emailHelp">
+                        <input type="file" class="form-control" id="exampleInputEmail1" name="imagePortfolio" aria-describedby="emailHelp">
+                        <?php if (isset($errors['imagePortfolio'])) : ?>
+                            <small class="text-errors"><?= $errors['imagePortfolio'] ?></small>
+                        <?php endif ?>
                     </div>
-                    <?php if (isset($errors['imagePortfolio'])) : ?>
 
-                        <small class="text-errors"><?= $errors['imagePortfolio'] ?></small>
-
-                    <?php endif ?>
 
 
                     <div class="form-group">
                         <label for="exampleInputText1" class="connexion-text">Votre texte</label>
-                        <textarea type="text" class="form-control" id="exampleInputText1" name="contentPortfolio" aria-describedby="PseudoHelp" placeholder="La compétence" value="<?= $content ?>"></textarea>
+                        <textarea type="text" class="form-control" id="exampleInputText1" name="contentPortfolio" aria-describedby="PseudoHelp" placeholder="La description" value="<?= $content ?>"></textarea>
+                        <?php if (isset($errors['imagePortfolio'])) : ?>
+                            <small class="text-errors"><?= $errors['imagePortfolio'] ?></small>
+                        <?php endif ?>
                     </div>
 
 
-
-                    <?php if (isset($errors['contentPortfolio'])) : ?>
-
-                        <small class="text-errors"><?= $errors['contentPortfolio'] ?></small>
-
-                    <?php endif ?>
 
                     <button type="submit" class="btn btn-primary" name="addSubmitPortfolio" value="submit">Ajouter</button>
                 </div>

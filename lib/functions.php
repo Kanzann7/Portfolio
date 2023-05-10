@@ -91,13 +91,28 @@ function validateSkillForm(string $image, string $content)
 
 function validatePortfolioForm(string $image, string $content)
 {
+    $image = false;
     $errors = [];
+    if (array_key_exists('imagePortfolio', $_FILES) && $_FILES['imagePortfolio']['error'] != UPLOAD_ERR_NO_FILE) {
+        // Validation du poids du fichier
+        $image = true;
+        $filesize = filesize($_FILES['imagePortfolio']['tmp_name']);
+        if ($filesize > MAX_UPLOAD_SIZE) {
+            $errors['imagePortfolio'] = 'Votre fichier excède 1 Mo.';
+        }
 
-    if (empty($image)) {
-        $errors['imagePortfolio'] = "Vous devez remplir ces deux champs !";
+        // Validation du type de fichier
+        $allowedMimeTypes = ['image/jpeg', 'image/gif', 'image/png'];
+        $mimeType = mime_content_type($_FILES['imagePortfolio']['tmp_name']);
+
+        if (!in_array($mimeType, $allowedMimeTypes)) {
+            $errors['imagePortfolio'] = 'Type de fichier non autorisé';
+        }
     }
-    if (empty($content)) {
-        $errors['contentPorfolio'] = "Vous devez remplir ces deux champs ! ";
+
+    if ((!$image) && empty($content)) {
+        $errors['imagePortfolio'] = 'Veuillez remplir les deux champs !';
+        $errors['contentPortfolio'] = 'Veuillez remplir les deux champs !';
     }
     return $errors;
 }

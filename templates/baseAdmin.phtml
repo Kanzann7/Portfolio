@@ -21,8 +21,50 @@
 
     <?php endif ?>
 
+    <header>
+        <div id="pre-nav">
+            <div class="nav-connexion">
+                <?php if (isConnected()) : ?>
+                    <a href="<?= constructUrl('/deconnexion'); ?>" target="_blank">
+                        <h2>Déconnexion</h2>
+                    </a>
+                <?php else : ?>
+                    <a href="<?= constructUrl('/connexion'); ?>" target="_blank">
+                        <h2>Connexion</h2>
+                    </a>
+                <?php endif ?>
+                <a href="<?= constructUrl('/inscription'); ?>" target="_blank">
+                    <h2>Inscription</h2>
+                </a>
+            </div>
 
-    <?php include $template . '.phtml'; ?>
+        </div>
+        <!--NAV BAR VISIBLE-->
+        <div id="nav-bar">
+            <div class="sauf-menu">
+                <h1>BIENVENUE</h1>
+                <a href="<?= constructUrl('/'); ?>" target="_blank">
+                    <img src="<?= asset("images/Accueil.png") ?>" alt="image de d10" class="d10">
+                </a>
+                <h1>ADMIN</h1>
+            </div>
+            <div class="menu">
+                <h1 class="menu-titre">ACCUEIL</h1>
+            </div>
+
+
+        </div>
+
+
+
+        </div>
+        </div>
+
+
+
+
+        <?php include $template . '.phtml'; ?>
+
 </body>
 
 </html>
