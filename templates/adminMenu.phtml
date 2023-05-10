@@ -5,28 +5,30 @@
 
         <div class="admin-box">
             <h2>Ajouter une compétence</h2>
-            <form action="<?= constructUrl('/adminMenu') ?>" method="POST">
+            <form action="<?= constructUrl('/adminMenu') ?>" enctype="multipart/form-data" method="POST">
                 <div class="form-div">
 
                     <div class="form-group">
 
-                        <label for="exampleInputEmail1" class="connexion-text">Votre image</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="imageSkill" aria-describedby="emailHelp">
+                        <label for="imageSkill" class="connexion-text">Votre image</label>
+                        <input type="file" class="form-control" id="imageSkill" name="imageSkill" aria-describedby="emailHelp">
+                        <?php if (isset($errors['imageSkill'])) : ?>
+                            <small class="text-errors"><?= $errors["imageSkill"] ?></small>
+                        <?php endif ?>
                     </div>
 
 
                     <div class="form-group">
                         <label for="exampleInputText1" class="connexion-text">Votre texte</label>
                         <textarea type="text" class="form-control" id="exampleInputText1" name="contentSkill" aria-describedby="PseudoHelp" placeholder="La compétence" value="<?= $content ?>"></textarea>
+                        <?php if (isset($errors['contentSkill'])) : ?>
+                            <small class="text-errors"><?= $errors['contentSkill'] ?></small>
+                        <?php endif ?>
                     </div>
 
 
 
-                    <?php if (isset($errors)) : ?>
 
-                        <small class="text-errors"><?= $errors ?></small>
-
-                    <?php endif ?>
 
                     <button type="submit" class="btn btn-primary" name="addSubmitSkill" value="submit">Ajouter</button>
                 </div>
@@ -46,17 +48,17 @@
                             <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
 
                             <img src='<?= asset("images/" . $skill->getImage()); ?>' class="logo">
-                            <button type="submit" class="btn btn-primary" name="removeSubmitSkill" value="submit">Supprimer</button>
+
 
                         <?php endif; ?>
+
                         <?php if ($skill->getContent()) : ?>
                             <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
                             <h3><?= $skill->getContent(); ?></h3>
-                            <button type="submit" class="btn btn-primary" name="removeSubmitSkill<?= $skill->getId() ?>" value="submit">Supprimer</button>
                         <?php endif; ?>
 
 
-
+                        <button type="submit" class="btn btn-primary" name="removeSubmitSkill" value="submit">Supprimer</button>
                     <?php endforeach ?>
 
 
@@ -91,6 +93,11 @@
                         <label for="exampleInputEmail1" class="connexion-text">Votre image</label>
                         <input type="text" class="form-control" id="exampleInputEmail1" name="imagePortfolio" aria-describedby="emailHelp">
                     </div>
+                    <?php if (isset($errors['imagePortfolio'])) : ?>
+
+                        <small class="text-errors"><?= $errors['imagePortfolio'] ?></small>
+
+                    <?php endif ?>
 
 
                     <div class="form-group">
@@ -100,9 +107,9 @@
 
 
 
-                    <?php if (isset($errors)) : ?>
+                    <?php if (isset($errors['contentPortfolio'])) : ?>
 
-                        <small class="text-errors"><?= $errors ?></small>
+                        <small class="text-errors"><?= $errors['contentPortfolio'] ?></small>
 
                     <?php endif ?>
 

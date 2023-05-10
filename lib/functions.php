@@ -63,10 +63,28 @@ function validateInscriptionForm(string $email, string $pseudo, string $password
 
 function validateSkillForm(string $image, string $content)
 {
+    $image = false;
     $errors = [];
+    if (array_key_exists('imageSkill', $_FILES) && $_FILES['imageSkill']['error'] != UPLOAD_ERR_NO_FILE) {
+        // Validation du poids du fichier
+        $image = true;
+        $filesize = filesize($_FILES['imageSkill']['tmp_name']);
+        if ($filesize > MAX_UPLOAD_SIZE) {
+            $errors['imageSkill'] = 'Votre fichier excède 1 Mo.';
+        }
 
-    if (empty($image) && empty($content)) {
-        $errors = 'Veuillez remplir au moins un des champs !';
+        // Validation du type de fichier
+        $allowedMimeTypes = ['image/jpeg', 'image/gif', 'image/png'];
+        $mimeType = mime_content_type($_FILES['imageSkill']['tmp_name']);
+
+        if (!in_array($mimeType, $allowedMimeTypes)) {
+            $errors['imageSkill'] = 'Type de fichier non autorisé';
+        }
+    }
+
+    if ((!$image) && empty($content)) {
+        $errors['imageSkill'] = 'Veuillez remplir au moins un des champs !';
+        $errors['contentSkill'] = 'Veuillez remplir au moins un des champs !';
     }
     return $errors;
 }
@@ -75,8 +93,11 @@ function validatePortfolioForm(string $image, string $content)
 {
     $errors = [];
 
-    if (empty($image) || empty($content)) {
-        $errors = "Vous devez remplir ces deux champs !";
+    if (empty($image)) {
+        $errors['imagePortfolio'] = "Vous devez remplir ces deux champs !";
+    }
+    if (empty($content)) {
+        $errors['contentPorfolio'] = "Vous devez remplir ces deux champs ! ";
     }
     return $errors;
 }
@@ -106,4 +127,21 @@ function checkCredentials($email, $pseudo, $password)
 
 
     return $user;
+}
+
+function slugify($string)
+{
+    // Remplace les caractères spéciaux par des tirets
+    $string = preg_replace('/[^\p{L}\p{N}]+/u', '-', $string);
+
+    // Convertit en minuscules
+    $string = mb_strtolower($string, 'UTF-8');
+
+    // Supprime les tirets en début et fin de chaîne
+    $string = trim($string, '-');
+
+    // Supprime les tirets répétés
+    $string = preg_replace('/-+/', '-', $string);
+
+    return $string;
 }

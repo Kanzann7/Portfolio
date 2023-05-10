@@ -22,14 +22,39 @@ $skills = $skillModel->getAllSkills();
 /* ADD SKILLS */
 
 if (isset($_POST['addSubmitSkill'])) {
-    $imageSkill = trim($_POST['imageSkill']);
+
     $contentSkill = trim($_POST['contentSkill']);
 
     $errors = validateSkillForm($imageSkill, $contentSkill);
 
 
+
+
     if (empty($errors)) {
-        $skillModel->addSkill($imageSkill, $contentSkill);
+
+
+        $filename = '';
+
+        if (array_key_exists('imageSkill', $_FILES) && $_FILES['imageSkill']['error'] != UPLOAD_ERR_NO_FILE) {
+
+            // Nettoyer le nom du fichier
+            $extension = pathinfo($_FILES['imageSkill']['name'], PATHINFO_EXTENSION);
+            $basename = pathinfo($_FILES['imageSkill']['name'], PATHINFO_FILENAME);
+
+            // Slugification du nom du fichier (on supprime caractères spéciaux, accents, majuscules, espaces, etc)
+            $basename = slugify($basename);
+
+            // On ajoute une chaîne aléatoire pour éviter les conflits
+            $filename = $basename . sha1(uniqid(rand(), true)) . '.' . $extension;
+
+            // Copier le fichier temporaire dans notre dossier "images"
+            if (!file_exists('images')) {
+                mkdir('images');
+            }
+
+            move_uploaded_file($_FILES['imageSkill']['tmp_name'], 'images/' . $filename);
+        }
+        $skillModel->addSkill($filename, $contentSkill);
         $_SESSION['flash'] = 'Compétence ajoutée !';
         header('Location: ' . constructUrl('/adminMenu'));
         exit;
