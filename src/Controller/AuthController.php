@@ -17,8 +17,8 @@ class AuthController
         if (!empty($_POST)) {
 
             // Récupération des données du formulaire
-            $pseudo = $_POST['pseudo'];
-            $email = $_POST['email'];
+            $pseudo = strip_tags(trim($_POST['pseudo']));
+            $email = strip_tags(trim($_POST['email']));
             $password = $_POST['password'];
 
             // 1. Est-ce que les identifiants sont corrects ?

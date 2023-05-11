@@ -44,20 +44,21 @@ class UserController
                 $hash = password_hash($password, PASSWORD_DEFAULT);
 
                 $user = new User([
-                    'nickname' => $pseudo,
+                    'pseudo' => $pseudo,
                     'email' => $email,
                     'password' => $hash,
                     'role' => UserRole::USER
                 ]);
 
 
+
                 $this->userModel->addUser($user);
+
 
                 // Ajout d'un message flash en session
                 $_SESSION['flash'] = 'Votre compte a été créé avec succès.';
 
-                // Redirection vers l'index.php mais sans les données du formulaire
-                // Design pattern : POST redirect GET (cf https://fr.wikipedia.org/wiki/Post-redirect-get)
+
                 header('Location: ' . constructUrl('home'));
                 exit;
             }

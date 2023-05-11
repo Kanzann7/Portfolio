@@ -1,50 +1,83 @@
-<article class="comments">
-
-    <div class="portfolio-block">
-        <div class="ensemble-portfolio">
-
-            <img src="<?= asset('images/' . $portfolioId->getImage()) ?>" class="portfolio-main-img">
-            <div class="ensemble-non-img">
-                <p class="portfolio-txt"><?= $portfolioId->getContent() ?></p>
-            </div>
+<header>
+    <div id="pre-nav">
+        <div class="nav-connexion">
+            <?php if ((new App\Service\UserSession())->getUser()) : ?>
+                <a href="<?= constructUrl('logout'); ?>">
+                    <h2>Déconnexion</h2>
+                </a>
+            <?php else : ?>
+                <a href="<?= constructUrl('login'); ?>">
+                    <h2>Connexion</h2>
+                </a>
+            <?php endif ?>
+            <a href="<?= constructUrl('signup'); ?>">
+                <h2>Inscription</h2>
+            </a>
         </div>
 
+    </div>
+    <!--NAV BAR VISIBLE-->
+    <div id="nav-bar">
+        <div class="sauf-menu">
+            <a href="<?= constructUrl('home'); ?>">
+                <img src="<?= asset("images/Accueil.png") ?>" alt="image de d10" class="d10">
+            </a>
+        </div>
+        <div class="menu">
+            <h1 class="menu-titre">ACCUEIL</h1>
+        </div>
 
 
     </div>
 
 
+    <article class="comments">
 
+        <div class="portfolio-block">
+            <div class="ensemble-portfolio">
 
-
-    <?php if ((new App\Service\UserSession())->getUser()) : ?>
-
-        <form action="<?= constructUrl('comments', ['id' => $idPortfolio]); ?>" method="POST">
-            <div class="form-div">
-
-                <div class="form-group">
-                    <label for="comment" class="comment-text">Votre commentaire</label>
-                    <textarea type="text" class="form-control" id="comment" name="comment" placeholder="Veuillez entrer un commentaire" value="<?= $comment ?>"></textarea>
+                <img src="<?= asset('images/' . $portfolioId->getImage()) ?>" class="portfolio-main-img">
+                <div class="ensemble-non-img">
+                    <p class="portfolio-txt"><?= $portfolioId->getContent() ?></p>
                 </div>
-                <?php if (isset($errors['comment'])) : ?>
-                    <div class="small">
-                        <small class="text-errors"><?= $errors['comment'] ?></small>
-                    </div>
-                <?php endif ?>
-
-                <button type="submit" class="btn btn-primary" name="submit" value="submit">Publier un commentaire</button>
             </div>
-        </form>
 
-    <?php else : ?>
-        <p class="flash-message"> Veuillez vous connecter pour poster un commentaire </p>
-    <?php endif ?>
 
-    <?php foreach ($comments as $comment) : ?>
-        <div class="portfolio-txt">
-            <h2><?= $comment->getUser()->getPseudo(); ?> le <?= $comment->getFormattedCreatedAt() ?></h2>
-            <p><?= $comment->getContent(); ?></p>
+
         </div>
-    <?php endforeach ?>
 
-</article>
+
+
+
+
+        <?php if ((new App\Service\UserSession())->getUser()) : ?>
+
+            <form action="<?= constructUrl('comments', ['id' => $idPortfolio]); ?>" method="POST">
+                <div class="form-div">
+
+                    <div class="form-group">
+                        <label for="comment" class="comment-text">Votre commentaire</label>
+                        <textarea type="text" class="form-control" id="comment" name="comment" placeholder="Veuillez entrer un commentaire" value="<?= $comment ?>"></textarea>
+                    </div>
+                    <?php if (isset($errors['comment'])) : ?>
+                        <div class="small">
+                            <small class="text-errors"><?= $errors['comment'] ?></small>
+                        </div>
+                    <?php endif ?>
+
+                    <button type="submit" class="btn btn-primary" name="submit" value="submit">Publier un commentaire</button>
+                </div>
+            </form>
+
+        <?php else : ?>
+            <p class="flash-message"> Veuillez vous connecter pour poster un commentaire </p>
+        <?php endif ?>
+
+        <?php foreach ($comments as $comment) : ?>
+            <div class="portfolio-txt">
+                <h2><?= $comment->getUser()->getPseudo(); ?> le <?= $comment->getFormattedCreatedAt() ?></h2>
+                <p><?= $comment->getContent(); ?></p>
+            </div>
+        <?php endforeach ?>
+
+    </article>
