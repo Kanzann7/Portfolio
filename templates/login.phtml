@@ -1,14 +1,14 @@
-<form action="<?= constructUrl('/adminLogin') ?>" method="POST">
+<form action="<?= constructUrl('login') ?>" method="POST">
     <div class="form-div">
         <div class="form-group">
             <label for="exampleInputEmail1" class="connexion-text">Votre email</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" name="email" placeholder="email@boitemail.fr" aria-describedby="emailHelp" value="<?= $email ?>">
+            <input type="text" class="form-control" id="exampleInputEmail1" name="email" value="<?= $email ?>" placeholder="email@boitemail.fr" aria-describedby="emailHelp">
         </div>
 
 
         <div class="form-group">
             <label for="exampleInputText1" class="connexion-text">Votre pseudo</label>
-            <input type="text" class="form-control" id="exampleInputText1" name="pseudo" aria-describedby="PseudoHelp" placeholder="Votre pseudo" value="<?= $pseudo ?>">
+            <input type="text" class="form-control" id="exampleInputText1" name="pseudo" value="<?= $pseudo ?>" aria-describedby="PseudoHelp" placeholder="Votre pseudo">
         </div>
 
         <div class="form-group">

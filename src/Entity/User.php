@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use App\Service\Enum\UserRole;
+
 class User
 {
     private int $id;
     private string $pseudo;
     private string $email;
     private string $password;
-    private string $role;
+    private UserRole $role;
 
     public function __construct(array $data = [])
     {
@@ -95,7 +97,7 @@ class User
     /**
      * Get the value of role
      */
-    public function getRole(): string
+    public function getRole(): UserRole
     {
         return $this->role;
     }
@@ -103,8 +105,11 @@ class User
     /**
      * Set the value of role
      */
-    public function setRole(string $role): self
+    public function setRole(string | UserRole $role): self
     {
+        if (is_string($role)) {
+            $role = UserRole::from($role);
+        }
         $this->role = $role;
 
         return $this;

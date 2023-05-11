@@ -5,7 +5,7 @@
 
         <div class="admin-box">
             <h2>Ajouter une compétence</h2>
-            <form action="<?= constructUrl('/adminMenu') ?>" enctype="multipart/form-data" method="POST">
+            <form action="<?= constructUrl('adminMenu') ?>" enctype="multipart/form-data" method="POST">
                 <div class="form-div">
 
                     <div class="form-group">
@@ -41,7 +41,7 @@
 
         <div class="admin-box">
             <h2>Supprimer une compétence</h2>
-            <form action="<?= constructUrl('/adminMenu') ?>" method="POST">
+            <form action="<?= constructUrl('adminMenu') ?>" method="POST">
                 <div class="form-div-delete-skill">
                     <?php foreach ($skills as $skill) : ?>
                         <?php if ($skill->getImage()) : ?>
@@ -85,7 +85,7 @@
 
         <div class="admin-box">
             <h2>Ajouter un portfolio</h2>
-            <form action="<?= constructUrl('/adminMenu') ?>" enctype="multipart/form-data" method="POST">
+            <form action="<?= constructUrl('adminMenu') ?>" enctype="multipart/form-data" method="POST">
                 <div class="form-div">
 
                     <div class="form-group">
@@ -120,7 +120,7 @@
 
         <div class="admin-box">
             <h2>Supprimer un portfolio</h2>
-            <form action="<?= constructUrl('/adminMenu') ?>" method="POST">
+            <form action="<?= constructUrl('adminMenu') ?>" method="POST">
                 <div class="form-div-delete-portfolio">
 
                     <?php foreach ($portfolios as $portfolio) : ?>

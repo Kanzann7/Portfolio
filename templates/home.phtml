@@ -1,16 +1,16 @@
 <header>
     <div id="pre-nav">
         <div class="nav-connexion">
-            <?php if (isConnected()) : ?>
-                <a href="<?= constructUrl('/deconnexion'); ?>" target="_blank">
+            <?php if ((new App\Service\UserSession())->getUser()) : ?>
+                <a href="<?= constructUrl('logout'); ?>">
                     <h2>Déconnexion</h2>
                 </a>
             <?php else : ?>
-                <a href="<?= constructUrl('/connexion'); ?>" target="_blank">
+                <a href="<?= constructUrl('login'); ?>">
                     <h2>Connexion</h2>
                 </a>
             <?php endif ?>
-            <a href="<?= constructUrl('/inscription'); ?>" target="_blank">
+            <a href="<?= constructUrl('signup'); ?>">
                 <h2>Inscription</h2>
             </a>
         </div>
@@ -21,14 +21,14 @@
         <div class="sauf-menu">
             <h1>BIENVENUE</h1>
             <div id="div-d10">
-                <img src="<?= asset("images/Accueil.png") ?>" alt="image de d10" class="d10">
+                <img src="<?= asset("images/Accueil.png") ?>" data-src="<?= asset('Musiques/d10.mp3'); ?>" alt="image de d10" class="d10">
             </div>
             <h1>AVENTURIER·E</h1>
         </div>
         <div class="menu">
             <h1 class="menu-titre">MENU</h1>
             <div class="buttons">
-                <img src="<?= asset('images/play.png') ?>" alt="boutton play" class="play">
+                <img src="<?= asset('images/play.png') ?>" data-src="<?= asset('Musiques/menu.wav'); ?>" alt="boutton play" class="play">
                 <img src="<?= asset('images/pause.png') ?>" alt="boutton pause" class="pause">
             </div>
 
@@ -140,7 +140,7 @@
 
         <div class="profil-droite">
             <div class="jeu-vidéo">
-                <img src="<?= asset('images/jeu vidéo modif.png') ?>" alt="image de manette" class="jeu-vidéo-img">
+                <img src="<?= asset('images/jeu vidéo modif.png') ?>" data-src="<?= asset('Musiques/manette.ogg'); ?>" alt="image de manette" class="jeu-vidéo-img">
                 <div class="sauf-manette">
                     <h2>JEU VIDEO</h2>
                     <p>Joueur invétéré sur différentes consoles mais <br>
@@ -151,7 +151,7 @@
 
             </div>
             <div class="écriture">
-                <img src="<?= asset('images/écriture modif.png') ?>" alt="image de crayon" class="écriture-img">
+                <img src="<?= asset('images/écriture modif.png') ?>" data-src="<?= asset('Musiques/write.mp3'); ?>" alt="image de crayon" class="écriture-img">
                 <div class="sauf-crayon">
                     <h2>ECRITURE</h2>
                     <p> Auteur de deux livres publiés, je ne cesse d’élaborer divers <br>
@@ -164,7 +164,7 @@
 
             </div>
             <div class="musique">
-                <img src="<?= asset('images/musique modif.png') ?>" alt="image de basse" class="musique-img">
+                <img src="<?= asset('images/musique modif.png') ?>" data-src="<?= asset('Musiques/slap.flac'); ?>" alt="image de basse" class="musique-img">
                 <div class="sauf-basse">
                     <h2>MUSIQUE</h2>
                     <p> Sur mon temps libre, je joue de la basse et compose divers <br>
@@ -217,7 +217,7 @@
                         <img src="<?= asset('images/' . $portfolio->getImage()) ?>" class="portfolio-main-img">
                         <div class="ensemble-non-img">
                             <p class="portfolio-txt"><?= $portfolio->getContent() ?></p>
-                            <a href="<?= constructUrl('/comments', ['id' => $portfolio->getId()]); ?>" target="_blank">
+                            <a href="<?= constructUrl('comments', ['id' => $portfolio->getId()]); ?>" target="_blank">
                                 <div class="boutton">
                                     <img src="<?= asset('images/souris modif.png') ?>" alt="image de souris" class="souris">
                                     <p class="portfolio-txt">Cliquez ici pour voir les commentaires</p>
@@ -313,7 +313,7 @@
 
 
     </div>
-    <a href="<?= constructUrl('/mentions-legales'); ?>" target="_blank">
+    <a href="<?= constructUrl('mentionsLegales'); ?>" target="_blank">
         <p class="mentions-text">Mentions légales</p>
     </a>
 

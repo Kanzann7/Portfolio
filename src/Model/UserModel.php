@@ -36,14 +36,14 @@ class UserModel extends AbstractModel
     }
 
 
-    function addUser(string $pseudo, string $email, string $password)
+    function addUser(User $user)
     {
         $role = "user";
         $sql = 'INSERT INTO users
         (pseudo, email, password, role)
         VALUES (?,?,?, ?)';
 
-        $this->db->prepareAndExecute($sql, [$pseudo, $email, $password, $role]);
+        $this->db->prepareAndExecute($sql, [$user->getPseudo(), $user->getEmail(), $user->getPassword(), $user->getRole()]);
     }
 
     function emailExists($email)
@@ -59,31 +59,18 @@ class UserModel extends AbstractModel
         }
         return false;
     }
-    function getUserByEmail($email)
+    function getUserByEmailAndPseudo($email, $pseudo)
     {
 
         $sql = 'SELECT *
                 FROM users
-                WHERE email = ?';
-        $result = $this->db->getOneResult($sql, [$email]);
+                WHERE email = ?
+                AND pseudo = ?';
+        $result = $this->db->getOneResult($sql, [$email, $pseudo]);
 
         if ($result) {
-            return $result;
+            return new User($result);
         }
-        return [];
-    }
-
-    function getUserByPseudo($pseudo)
-    {
-
-        $sql = 'SELECT *
-                FROM users
-                WHERE pseudo = ?';
-        $result = $this->db->getOneResult($sql, [$pseudo]);
-
-        if ($result) {
-            return $result;
-        }
-        return [];
+        return null;
     }
 }

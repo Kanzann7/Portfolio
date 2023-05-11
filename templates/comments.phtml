@@ -17,9 +17,9 @@
 
 
 
-    <?php if (isConnected()) : ?>
+    <?php if ((new App\Service\UserSession())->getUser()) : ?>
 
-        <form action="<?= constructUrl('/comments', ['id' => $idPortfolio]); ?>" method="POST">
+        <form action="<?= constructUrl('comments', ['id' => $idPortfolio]); ?>" method="POST">
             <div class="form-div">
 
                 <div class="form-group">

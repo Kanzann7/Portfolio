@@ -24,16 +24,16 @@
     <header>
         <div id="pre-nav">
             <div class="nav-connexion">
-                <?php if (isConnected()) : ?>
-                    <a href="<?= constructUrl('/deconnexion'); ?>" target="_blank">
+                <?php if ((new App\Service\UserSession())->isAdmin()) : ?>
+                    <a href="<?= constructUrl('logout'); ?>">
                         <h2>Déconnexion</h2>
                     </a>
                 <?php else : ?>
-                    <a href="<?= constructUrl('/connexion'); ?>" target="_blank">
+                    <a href="<?= constructUrl('login'); ?>">
                         <h2>Connexion</h2>
                     </a>
                 <?php endif ?>
-                <a href="<?= constructUrl('/inscription'); ?>" target="_blank">
+                <a href="<?= constructUrl('signup'); ?>">
                     <h2>Inscription</h2>
                 </a>
             </div>
@@ -43,7 +43,7 @@
         <div id="nav-bar">
             <div class="sauf-menu">
                 <h1>BIENVENUE</h1>
-                <a href="<?= constructUrl('/'); ?>" target="_blank">
+                <a href="<?= constructUrl('home'); ?>">
                     <img src="<?= asset("images/Accueil.png") ?>" alt="image de d10" class="d10">
                 </a>
                 <h1>ADMIN</h1>
@@ -63,7 +63,7 @@
 
 
 
-        <?php include $template . '.phtml'; ?>
+        <?php include TEMPLATE_DIR . '/admin/' . $template . '.phtml'; ?>
 
 </body>
 

@@ -1,7 +1,11 @@
 <?php
-session_start();
+
+use App\Service\UserSession;
 
 require '../vendor/autoload.php';
+session_start();
+
+
 require '../app/config.php';
 require '../lib/functions.php';
 
@@ -14,40 +18,43 @@ if ($path == "") {
     $path = "/";
 }
 
-// Routing
-switch ($path) {
-    case '/';
-        require '../controllers/home.php';
-        break;
-    case '/connexion';
-        require '../controllers/connexion.php';
-        break;
-    case '/inscription';
-        require '../controllers/inscription.php';
-        break;
-
-    case '/deconnexion';
-        require '../controllers/deconnexion.php';
-        break;
-
-    case '/mentions-legales';
-        require '../controllers/mentionsLegales.php';
-        break;
-
-    case '/comments';
-        require '../controllers/comments.php';
-        break;
-
-    case '/adminLogin';
-        require '../controllers/adminLogin.php';
-        break;
-
-    case '/adminMenu';
-        require '../controllers/adminMenu.php';
-        break;
-
-    default:
+if (strpos($path, '/admin') === 0) {
+    $userSession = new UserSession();
+    if (!$userSession->isAdmin()) {
         http_response_code(404);
-        echo 'Page introuvable';
+        echo "Vous n'êtes pas autorisé à consulter cette page.";
         exit;
+    }
+}
+$routes = require '../app/routes.php';
+
+// On crée une constante ROUTES pour avoir accès à nos routes partout
+define('ROUTES', $routes);
+
+$className = null;
+$method = null;
+
+foreach ($routes as $route) {
+    if ($path == $route['path']) {
+        $className = $route['controller'];
+        $method = $route['method'];
+        break;
+    }
+}
+
+// Si on n'a pas trouvé le path dans les routes... => erreur 404
+if ($className == null) {
+    http_response_code(404);
+    echo 'Erreur 404 : Page introuvable';
+    exit;
+}
+
+// Ici j'ai trouvé ma route et le contrôleur qui va avec ! => on inclut le controller
+try {
+    $className = "App\\Controller\\$className";
+    $controller = new $className(); // Par exemple pour l'accueil "App\\Controller\\HomeControler"
+    $controller->$method();
+} catch (Exception $exception) {
+    echo $exception->getMessage();
+    exit;
 }

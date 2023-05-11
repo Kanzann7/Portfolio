@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 02 mai 2023 à 14:27
+-- Généré le : mer. 10 mai 2023 à 13:19
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.1.10
 
@@ -34,6 +34,14 @@ CREATE TABLE `comments` (
   `usersId` int NOT NULL,
   `portfolioId` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `comments`
+--
+
+INSERT INTO `comments` (`id`, `createdAt`, `content`, `usersId`, `portfolioId`) VALUES
+(30, '2023-05-03 09:31:16', 'Bonjour', 24, 1),
+(31, '2023-05-05 09:35:55', 'g', 24, 1);
 
 -- --------------------------------------------------------
 
@@ -73,8 +81,6 @@ CREATE TABLE `skills` (
 --
 
 INSERT INTO `skills` (`id`, `image`, `content`) VALUES
-(1, 'html.png', NULL),
-(2, 'css.png', NULL),
 (3, 'js.png', NULL),
 (4, 'php.png', NULL),
 (5, 'mysql.png', NULL),
@@ -92,17 +98,18 @@ CREATE TABLE `users` (
   `id` int NOT NULL,
   `pseudo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `role` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `pseudo`, `email`, `password`) VALUES
-(19, 'Kanzan', 'clemjoulin@hotmail.fr', '$2y$10$jyRx21NPSkjW29odl2Wrdu.7vFGVKJLQdSfxt/zLqdviUxlg5hctq'),
-(21, 'Babar', 'babbar@hotmail.com', '$2y$10$5v97RU.4fmh1ZVRYTQd3zOqLbCd67CVhzfPH189eG253wkO7NxHWu'),
-(22, 'jjhj', 'gfgf@h.mail', '$2y$10$1YwNBG8c0kbUpc2OVDVd8.ggXpwgjvBQOupQlq2FRNl/PdTCa2i7y');
+INSERT INTO `users` (`id`, `pseudo`, `email`, `password`, `role`) VALUES
+(23, 'Paco', 'Paco@hotmail.fr', '$2y$10$Cynp0ynYZrtl5OsHvUYH9.84mZktBzMehnRrKpEu.ZUbOhlexa3jq', 'user'),
+(24, 'Kanzan', 'clemjoulin@hotmail.fr', '$2y$10$ebWlh0zA8FdTf0kGhQ8QRuQs7gOQq5HwvZhmrRo6OIGI1Qls7pWNq', 'admin'),
+(25, 'Patrice', 'bonjour@gmail.com', '$2y$10$i8v6s7PDp2SJlccVvJekdugVT2gAe7ESyI87C.pc78FM0NaE2Idc6', 'user');
 
 --
 -- Index pour les tables déchargées
@@ -143,25 +150,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT pour la table `portfolio`
 --
 ALTER TABLE `portfolio`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Contraintes pour les tables déchargées
