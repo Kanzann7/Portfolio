@@ -53,12 +53,12 @@ class PortfolioModel extends AbstractModel
         $this->db->prepareAndExecute($sql, [$id]);
     }
 
-    function updatePortfolio($portfolio)
+    function updatePortfolio(string $image, string $content, int $id)
     {
         $sql = 'UPDATE portfolio
                 SET image = ?,
                     content = ?
                 WHERE id = ?';
-        $this->db->prepareAndExecute($sql, [$portfolio->getImage(), $portfolio->getContent(), $portfolio->getId()]);
+        $this->db->prepareAndExecute($sql, [$image, $content, $id]);
     }
 }

@@ -222,52 +222,114 @@ class AdminMenuController
 
         /* UPDATE SKILLS */
 
-        $imageSkill = '';
-        $contentSkill = '';
-        $skillModel = new SkillModel();
-        $skill = $skillModel->getOneSkill($_GET["id"]);
+
+        if (isset($_GET['skill'])) {
+            $imageSkill = '';
+            $contentSkill = '';
+            $skillModel = new SkillModel();
+
+            $skill = $skillModel->getOneSkill($_GET["skill"]);
+
+            if (isset($_POST['updateSubmitSkill' . $skill->getId()])) {
+
+                $contentSkill = trim($_POST['contentSkill']);
+
+                $errors = $this->validateSkillForm($imageSkill, $contentSkill);
 
 
 
-        if (isset($_POST['updateSubmitSkill' . $skill->getId()])) {
 
-            $contentSkill = trim($_POST['contentSkill']);
-
-            $errors = $this->validateSkillForm($imageSkill, $contentSkill);
+                if (empty($errors)) {
 
 
+                    $filename = '';
 
+                    if (array_key_exists('imageSkill', $_FILES) && $_FILES['imageSkill']['error'] != UPLOAD_ERR_NO_FILE) {
 
-            if (empty($errors)) {
+                        // Nettoyer le nom du fichier
+                        $extension = pathinfo($_FILES['imageSkill']['name'], PATHINFO_EXTENSION);
+                        $basename = pathinfo($_FILES['imageSkill']['name'], PATHINFO_FILENAME);
 
+                        // Slugification du nom du fichier (on supprime caractères spéciaux, accents, majuscules, espaces, etc)
+                        $basename = slugify($basename);
 
-                $filename = '';
+                        // On ajoute une chaîne aléatoire pour éviter les conflits
+                        $filename = $basename . sha1(uniqid(rand(), true)) . '.' . $extension;
 
-                if (array_key_exists('imageSkill', $_FILES) && $_FILES['imageSkill']['error'] != UPLOAD_ERR_NO_FILE) {
+                        // Copier le fichier temporaire dans notre dossier "images"
+                        if (!file_exists('images')) {
+                            mkdir('images');
+                        }
 
-                    // Nettoyer le nom du fichier
-                    $extension = pathinfo($_FILES['imageSkill']['name'], PATHINFO_EXTENSION);
-                    $basename = pathinfo($_FILES['imageSkill']['name'], PATHINFO_FILENAME);
-
-                    // Slugification du nom du fichier (on supprime caractères spéciaux, accents, majuscules, espaces, etc)
-                    $basename = slugify($basename);
-
-                    // On ajoute une chaîne aléatoire pour éviter les conflits
-                    $filename = $basename . sha1(uniqid(rand(), true)) . '.' . $extension;
-
-                    // Copier le fichier temporaire dans notre dossier "images"
-                    if (!file_exists('images')) {
-                        mkdir('images');
+                        move_uploaded_file($_FILES['imageSkill']['tmp_name'], 'images/' . $filename);
                     }
-
-                    move_uploaded_file($_FILES['imageSkill']['tmp_name'], 'images/' . $filename);
+                    $skillModel->updateSkill($filename, $contentSkill, $skill->getId());
+                    $_SESSION['flash'] = 'Compétence modifiée !';
+                    header('Location: ' . constructUrl('updateSkillsAndPortfolios', ['skill' => $skill->getId()]));
+                    exit;
                 }
-                $skillModel->updateSkill($filename, $contentSkill, $skill->getId());
-                $_SESSION['flash'] = 'Compétence modifiée !';
-                header('Location: ' . constructUrl('updateSkillsAndPortfolios', ['id' => $skill->getId()]));
-                exit;
             }
         }
+        // dump($skill);
+        // exit;
+
+
+
+
+        /* UPDATE PORTFOLIO */
+
+        if (isset($_GET['portfolio'])) {
+
+            $imagePortfolio = '';
+            $contentPortfolio = '';
+            $portfolioModel = new PortfolioModel();
+
+            $portfolio = $portfolioModel->getOnePortfolio($_GET["portfolio"]);
+
+            if (isset($_POST['updateSubmitPortfolio' . $portfolio->getId()])) {
+
+                $contentPortfolio = trim($_POST['contentPortfolio']);
+
+                $errors = $this->validateSkillForm($imagePortfolio, $contentPortfolio);
+
+
+
+
+                if (empty($errors)) {
+
+
+                    $filename = '';
+
+                    if (array_key_exists('imagePortfolio', $_FILES) && $_FILES['imagePortfolio']['error'] != UPLOAD_ERR_NO_FILE) {
+
+                        // Nettoyer le nom du fichier
+                        $extension = pathinfo($_FILES['imagePortfolio']['name'], PATHINFO_EXTENSION);
+                        $basename = pathinfo($_FILES['imagePortfolio']['name'], PATHINFO_FILENAME);
+
+                        // Slugification du nom du fichier (on supprime caractères spéciaux, accents, majuscules, espaces, etc)
+                        $basename = slugify($basename);
+
+                        // On ajoute une chaîne aléatoire pour éviter les conflits
+                        $filename = $basename . sha1(uniqid(rand(), true)) . '.' . $extension;
+
+                        // Copier le fichier temporaire dans notre dossier "images"
+                        if (!file_exists('images')) {
+                            mkdir('images');
+                        }
+
+                        move_uploaded_file($_FILES['imagePortfolio']['tmp_name'], 'images/' . $filename);
+                    }
+                    $skillModel->updateSkill($filename, $contentPortfolio, $portfolio->getId());
+                    $_SESSION['flash'] = 'Portfolio modifié !';
+                    header('Location: ' . constructUrl('updateSkillsAndPortfolios', ['portfolio' => $portfolio->getId()]));
+                    exit;
+                }
+            }
+        }
+
+
+
+
 
         if (isset($_SESSION['flash'])) {
             $message =  $_SESSION['flash'];
