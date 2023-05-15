@@ -41,6 +41,11 @@ $routes = [
         'path' => '/mentionsLegales',
         'controller' => 'MentionsLegalesController',
         'method' => 'index'
+    ],
+    'updateSkillsAndPortfolios' => [
+        'path' => '/updateSkillsAndPortfolios',
+        'controller' => 'Admin\\AdminMenuController',
+        'method' => 'update'
     ]
 
 ];

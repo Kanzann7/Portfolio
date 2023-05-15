@@ -59,6 +59,12 @@
 
 
                         <button type="submit" class="btn btn-primary" name="removeSubmitSkill<?= $skill->getId() ?>" value="submit">Supprimer</button>
+                        <a href="<?= constructUrl('updateSkillsAndPortfolios', ['id' => $skill->getId()]); ?>">
+                            <div id="update-button">
+                                <p>Modifier</p>
+                            </div>
+
+                        </a>
                     <?php endforeach ?>
 
 

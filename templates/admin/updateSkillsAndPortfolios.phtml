@@ -1,0 +1,62 @@
+<div id="admin-super-box">
+    <div id="admin-skill-box">
+
+        <div class="admin-box">
+            <h2>Modifier une compétence</h2>
+            <form action="<?= constructUrl('updateSkillsAndPortfolios', ['id' => $skillId->getId()]); ?>" enctype="multipart/form-data" method="POST">
+                <div class="form-div">
+
+                    <div class="form-group">
+
+                        <?php if ($skillId->getImage()) : ?>
+                            <label for="imageSkill" class="connexion-text">Votre image</label>
+                            <input type="hidden" name="<?= $skillId->getId() ?>" value="<?= $skillId->getId() ?>">
+                            <img src="<?= asset('images/' . $skillId->getImage()) ?>" class="portfolio-main-img">
+                            <input type="file" class="form-control" id="imageSkill" name="imageSkill" aria-describedby="emailHelp">
+                        <?php endif ?>
+                        <?php if (isset($errors['imageSkill'])) : ?>
+                            <small class="text-errors"><?= $errors["imageSkill"] ?></small>
+                        <?php endif ?>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+
+                        <?php if ($skillId->getContent()) : ?>
+                            <label for="exampleInputText1" class="connexion-text">Votre texte</label>
+                            <input type="hidden" name="<?= $skillId->getId() ?>" value="<?= $skillId->getId() ?>">
+                            <h3><?= $skillId->getContent(); ?></h3>
+                        <?php endif ?>
+                        <textarea type="text" class="form-control" id="exampleInputText1" name="contentSkill" aria-describedby="PseudoHelp" placeholder="La compétence" value="<?= $content ?>"></textarea>
+                        <?php if (isset($errors['contentSkill'])) : ?>
+                            <small class="text-errors"><?= $errors['contentSkill'] ?></small>
+                        <?php endif ?>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary" name="updateSubmitSkill<?= $skillId->getId() ?>" value="submit">Modfier</button>
+
+
+                    </a>
+                </div>
+            </form>
+
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+</div>

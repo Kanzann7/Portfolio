@@ -9,39 +9,40 @@ use App\Service\UserSession;
 
 class AdminMenuController
 {
+    public function validateSkillForm(string $image, string $content)
+    {
+        $image = false;
+        $errors = [];
+        if (array_key_exists('imageSkill', $_FILES) && $_FILES['imageSkill']['error'] != UPLOAD_ERR_NO_FILE) {
+            // Validation du poids du fichier
+            $image = true;
+            $filesize = filesize($_FILES['imageSkill']['tmp_name']);
+            if ($filesize > MAX_UPLOAD_SIZE) {
+                $errors['imageSkill'] = 'Votre fichier excède 1 Mo.';
+            }
+
+            // Validation du type de fichier
+            $allowedMimeTypes = ['image/jpeg', 'image/gif', 'image/png'];
+            $mimeType = mime_content_type($_FILES['imageSkill']['tmp_name']);
+
+            if (!in_array($mimeType, $allowedMimeTypes)) {
+                $errors['imageSkill'] = 'Type de fichier non autorisé';
+            }
+        }
+
+        if ((!$image) && empty($content)) {
+            $errors['imageSkill'] = 'Veuillez remplir au moins un des champs !';
+            $errors['contentSkill'] = 'Veuillez remplir au moins un des champs !';
+        }
+        return $errors;
+    }
 
     function index()
     {
 
 
         /* SKILLS */
-        function validateSkillForm(string $image, string $content)
-        {
-            $image = false;
-            $errors = [];
-            if (array_key_exists('imageSkill', $_FILES) && $_FILES['imageSkill']['error'] != UPLOAD_ERR_NO_FILE) {
-                // Validation du poids du fichier
-                $image = true;
-                $filesize = filesize($_FILES['imageSkill']['tmp_name']);
-                if ($filesize > MAX_UPLOAD_SIZE) {
-                    $errors['imageSkill'] = 'Votre fichier excède 1 Mo.';
-                }
 
-                // Validation du type de fichier
-                $allowedMimeTypes = ['image/jpeg', 'image/gif', 'image/png'];
-                $mimeType = mime_content_type($_FILES['imageSkill']['tmp_name']);
-
-                if (!in_array($mimeType, $allowedMimeTypes)) {
-                    $errors['imageSkill'] = 'Type de fichier non autorisé';
-                }
-            }
-
-            if ((!$image) && empty($content)) {
-                $errors['imageSkill'] = 'Veuillez remplir au moins un des champs !';
-                $errors['contentSkill'] = 'Veuillez remplir au moins un des champs !';
-            }
-            return $errors;
-        }
 
         $imageSkill = '';
         $contentSkill = '';
@@ -54,7 +55,7 @@ class AdminMenuController
 
             $contentSkill = trim($_POST['contentSkill']);
 
-            $errors = validateSkillForm($imageSkill, $contentSkill);
+            $errors = $this->validateSkillForm($imageSkill, $contentSkill);
 
 
 
@@ -100,6 +101,16 @@ class AdminMenuController
                 exit;
             }
         }
+
+
+
+
+
+
+
+
+
+
 
         /* PORTFOLIO */
         function validatePortfolioForm(string $image, string $content)
@@ -174,7 +185,7 @@ class AdminMenuController
             }
         }
 
-        /* REMOVE SKILLS */
+        /* REMOVE PORTFOLIOS */
         foreach ($portfolios as $portfolio) {
             if (isset($_POST['removeSubmitPortfolio' . $portfolio->getId()])) {
 
@@ -201,6 +212,69 @@ class AdminMenuController
 
 
         $template = "adminMenu";
+        include TEMPLATE_DIR . "/admin/baseAdmin.phtml";
+    }
+
+
+
+    /* UPDATE SKILLS */
+    public function update()
+    {
+        $imageSkill = '';
+        $contentSkill = '';
+        $skillModel = new SkillModel();
+        $idSkill = (int) $_GET["id"];
+        $skillId = $skillModel->getOneSkill($idSkill);
+
+
+        if (isset($_POST['updateSubmitSkill' . $skillId->getId()])) {
+
+            $contentSkill = trim($_POST['contentSkill']);
+
+            $errors = $this->validateSkillForm($imageSkill, $contentSkill);
+
+
+
+
+            if (empty($errors)) {
+
+
+                $filename = '';
+
+                if (array_key_exists('imageSkill', $_FILES) && $_FILES['imageSkill']['error'] != UPLOAD_ERR_NO_FILE) {
+
+                    // Nettoyer le nom du fichier
+                    $extension = pathinfo($_FILES['imageSkill']['name'], PATHINFO_EXTENSION);
+                    $basename = pathinfo($_FILES['imageSkill']['name'], PATHINFO_FILENAME);
+
+                    // Slugification du nom du fichier (on supprime caractères spéciaux, accents, majuscules, espaces, etc)
+                    $basename = slugify($basename);
+
+                    // On ajoute une chaîne aléatoire pour éviter les conflits
+                    $filename = $basename . sha1(uniqid(rand(), true)) . '.' . $extension;
+
+                    // Copier le fichier temporaire dans notre dossier "images"
+                    if (!file_exists('images')) {
+                        mkdir('images');
+                    }
+
+                    move_uploaded_file($_FILES['imageSkill']['tmp_name'], 'images/' . $filename);
+                }
+                $skillModel->updateSkill($filename, $contentSkill);
+                $_SESSION['flash'] = 'Compétence modifiée !';
+                header('Location: ' . constructUrl('updateSkillsAndPortfolios'));
+                exit;
+            }
+        }
+
+        if (isset($_SESSION['flash'])) {
+            $message =  $_SESSION['flash'];
+            $_SESSION['flash'] = null;
+        }
+
+
+
+        $template = "updateSkillsAndPortfolios";
         include TEMPLATE_DIR . "/admin/baseAdmin.phtml";
     }
 }
