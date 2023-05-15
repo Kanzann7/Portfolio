@@ -3,15 +3,15 @@
 
         <div class="admin-box">
             <h2>Modifier une compétence</h2>
-            <form action="<?= constructUrl('updateSkillsAndPortfolios', ['id' => $skillId->getId()]); ?>" enctype="multipart/form-data" method="POST">
+            <form action="<?= constructUrl('updateSkillsAndPortfolios', ['id' => $skill->getId()]); ?>" enctype="multipart/form-data" method="POST">
                 <div class="form-div">
 
                     <div class="form-group">
 
-                        <?php if ($skillId->getImage()) : ?>
+                        <?php if ($skill->getImage()) : ?>
                             <label for="imageSkill" class="connexion-text">Votre image</label>
-                            <input type="hidden" name="<?= $skillId->getId() ?>" value="<?= $skillId->getId() ?>">
-                            <img src="<?= asset('images/' . $skillId->getImage()) ?>" class="portfolio-main-img">
+                            <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
+                            <img src="<?= asset('images/' . $skill->getImage()) ?>" class="portfolio-main-img">
                             <input type="file" class="form-control" id="imageSkill" name="imageSkill" aria-describedby="emailHelp">
                         <?php endif ?>
                         <?php if (isset($errors['imageSkill'])) : ?>
@@ -24,10 +24,10 @@
 
                     <div class="form-group">
 
-                        <?php if ($skillId->getContent()) : ?>
+                        <?php if ($skill->getContent()) : ?>
                             <label for="exampleInputText1" class="connexion-text">Votre texte</label>
-                            <input type="hidden" name="<?= $skillId->getId() ?>" value="<?= $skillId->getId() ?>">
-                            <h3><?= $skillId->getContent(); ?></h3>
+                            <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
+                            <h3><?= $skill->getContent(); ?></h3>
                         <?php endif ?>
                         <textarea type="text" class="form-control" id="exampleInputText1" name="contentSkill" aria-describedby="PseudoHelp" placeholder="La compétence" value="<?= $content ?>"></textarea>
                         <?php if (isset($errors['contentSkill'])) : ?>
@@ -36,7 +36,59 @@
                     </div>
 
 
-                    <button type="submit" class="btn btn-primary" name="updateSubmitSkill<?= $skillId->getId() ?>" value="submit">Modfier</button>
+                    <button type="submit" class="btn btn-primary" name="updateSubmitSkill<?= $skill->getId() ?>" value="submit">Modfier</button>
+
+
+                    </a>
+                </div>
+            </form>
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <div id="admin-porfolio-box">
+
+        <div class="admin-box">
+            <h2>Modifier une compétence</h2>
+            <form action="<?= constructUrl('updateSkillsAndPortfolios', ['id' => $skill->getId()]); ?>" enctype="multipart/form-data" method="POST">
+                <div class="form-div">
+
+                    <div class="form-group">
+
+                        <?php if ($skill->getImage()) : ?>
+                            <label for="imageSkill" class="connexion-text">Votre image</label>
+                            <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
+                            <img src="<?= asset('images/' . $skill->getImage()) ?>" class="portfolio-main-img">
+                            <input type="file" class="form-control" id="imageSkill" name="imageSkill" aria-describedby="emailHelp">
+                        <?php endif ?>
+                        <?php if (isset($errors['imageSkill'])) : ?>
+                            <small class="text-errors"><?= $errors["imageSkill"] ?></small>
+                        <?php endif ?>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+
+                        <?php if ($skill->getContent()) : ?>
+                            <label for="exampleInputText1" class="connexion-text">Votre texte</label>
+                            <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
+                            <h3><?= $skill->getContent(); ?></h3>
+                        <?php endif ?>
+                        <textarea type="text" class="form-control" id="exampleInputText1" name="contentSkill" aria-describedby="PseudoHelp" placeholder="La compétence" value="<?= $content ?>"></textarea>
+                        <?php if (isset($errors['contentSkill'])) : ?>
+                            <small class="text-errors"><?= $errors['contentSkill'] ?></small>
+                        <?php endif ?>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary" name="updateSubmitSkill<?= $skill->getId() ?>" value="submit">Modfier</button>
 
 
                     </a>
@@ -54,7 +106,6 @@
 
 
     </div>
-
 
 
 

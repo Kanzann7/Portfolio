@@ -217,17 +217,19 @@ class AdminMenuController
 
 
 
-    /* UPDATE SKILLS */
     public function update()
     {
+
+        /* UPDATE SKILLS */
+
         $imageSkill = '';
         $contentSkill = '';
         $skillModel = new SkillModel();
-        $idSkill = (int) $_GET["id"];
-        $skillId = $skillModel->getOneSkill($idSkill);
+        $skill = $skillModel->getOneSkill($_GET["id"]);
 
 
-        if (isset($_POST['updateSubmitSkill' . $skillId->getId()])) {
+
+        if (isset($_POST['updateSubmitSkill' . $skill->getId()])) {
 
             $contentSkill = trim($_POST['contentSkill']);
 
@@ -260,9 +262,9 @@ class AdminMenuController
 
                     move_uploaded_file($_FILES['imageSkill']['tmp_name'], 'images/' . $filename);
                 }
-                $skillModel->updateSkill($filename, $contentSkill);
+                $skillModel->updateSkill($filename, $contentSkill, $skill->getId());
                 $_SESSION['flash'] = 'Compétence modifiée !';
-                header('Location: ' . constructUrl('updateSkillsAndPortfolios'));
+                header('Location: ' . constructUrl('updateSkillsAndPortfolios', ['id' => $skill->getId()]));
                 exit;
             }
         }
