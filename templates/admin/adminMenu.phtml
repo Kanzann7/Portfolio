@@ -1,7 +1,7 @@
 <div id="admin-super-box">
     <div id="admin-skill-box">
 
-
+        //* ADD SKILL //
 
         <div class="admin-box">
             <h2>Ajouter une compétence</h2>
@@ -9,14 +9,12 @@
                 <div class="form-div">
 
                     <div class="form-group">
-
                         <label for="imageSkill" class="connexion-text">Votre image</label>
                         <input type="file" class="form-control" id="imageSkill" name="imageSkill" aria-describedby="emailHelp">
                         <?php if (isset($errors['imageSkill'])) : ?>
                             <small class="text-errors"><?= $errors["imageSkill"] ?></small>
                         <?php endif ?>
                     </div>
-
 
                     <div class="form-group">
                         <label for="exampleInputText1" class="connexion-text">Votre texte</label>
@@ -26,18 +24,14 @@
                         <?php endif ?>
                     </div>
 
-
-
-
-
                     <button type="submit" class="btn btn-primary" name="addSubmitSkill" value="submit">Ajouter</button>
                 </div>
 
             </form>
 
-
-
         </div>
+
+        //* REMOVE SKILL //
 
         <div class="admin-box">
             <h2>Supprimer une compétence</h2>
@@ -46,39 +40,24 @@
                     <?php foreach ($skills as $skill) : ?>
                         <?php if ($skill->getImage()) : ?>
                             <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
-
                             <img src='<?= asset("images/" . $skill->getImage()); ?>' class="logo">
-
-
                         <?php endif; ?>
-
                         <?php if ($skill->getContent()) : ?>
                             <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
                             <h3><?= $skill->getContent(); ?></h3>
                         <?php endif; ?>
-
 
                         <button type="submit" class="btn btn-primary" name="removeSubmitSkill<?= $skill->getId() ?>" value="submit">Supprimer</button>
                         <a href="<?= constructUrl('updateSkillsAndPortfolios', ['skill' => $skill->getId()]); ?>">
                             <div id="update-button">
                                 <p>Modifier</p>
                             </div>
-
                         </a>
                     <?php endforeach ?>
-
-
-
-
-
-
-
 
                 </div>
 
             </form>
-
-
 
         </div>
 
@@ -87,7 +66,7 @@
 
     <div id="admin-portfolio-box">
 
-
+        //* ADD PORTFOLIO //
 
         <div class="admin-box">
             <h2>Ajouter un portfolio</h2>
@@ -103,15 +82,12 @@
                     </div>
 
                     <div class="form-group">
-
                         <label for="exampleInputEmail1" class="connexion-text">Votre image</label>
                         <input type="file" class="form-control" id="exampleInputEmail1" name="imagePortfolio" aria-describedby="emailHelp">
                         <?php if (isset($errors['imagePortfolio'])) : ?>
                             <small class="text-errors"><?= $errors['imagePortfolio'] ?></small>
                         <?php endif ?>
                     </div>
-
-
 
                     <div class="form-group">
                         <label for="exampleInputText1" class="connexion-text">Votre texte</label>
@@ -121,16 +97,14 @@
                         <?php endif ?>
                     </div>
 
-
-
                     <button type="submit" class="btn btn-primary" name="addSubmitPortfolio" value="submit">Ajouter</button>
                 </div>
 
             </form>
 
-
-
         </div>
+
+        //* REMOVE PORTFOLIO //
 
         <div class="admin-box">
             <h2>Supprimer un portfolio</h2>
@@ -138,39 +112,28 @@
                 <div class="form-div-delete-portfolio">
 
                     <?php foreach ($portfolios as $portfolio) : ?>
-
                         <div class="ensemble-portfolio">
                             <input type="hidden" name="<?= $portfolio->getId() ?>" value="<?= $portfolio->getId() ?>">
-
                             <img src="<?= asset('images/' . $portfolio->getImage()) ?>" class="portfolio-main-img">
                             <div class="ensemble-non-img">
                                 <p class="portfolio-txt"><?= $portfolio->getContent() ?></p>
-
-
                             </div>
                         </div>
+
                         <button type="submit" class="btn btn-primary" name="removeSubmitPortfolio<?= $portfolio->getId() ?>" value="submit">Supprimer</button>
 
                         <a href="<?= constructUrl('updateSkillsAndPortfolios', ['portfolio' => $portfolio->getId()]); ?>">
                             <div id="update-button">
                                 <p>Modifier</p>
                             </div>
-
                         </a>
                     <?php endforeach ?>
                 </div>
-
-
-
-
 
         </div>
 
         </form>
 
-
-
     </div>
 
-</div>
 </div>
