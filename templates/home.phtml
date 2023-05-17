@@ -1,3 +1,5 @@
+//* MENU CONNEXION //
+
 <header>
     <div id="pre-nav">
         <div class="nav-connexion">
@@ -14,9 +16,10 @@
                 <h2>Inscription</h2>
             </a>
         </div>
-
     </div>
-    <!--NAV BAR VISIBLE-->
+
+    //* NAV BAR VISIBLE //
+
     <div id="nav-bar">
         <div class="sauf-menu">
             <h1>BIENVENUE</h1>
@@ -31,18 +34,13 @@
                 <img src="<?= asset('images/play.png') ?>" data-src="<?= asset('Musiques/menu.wav'); ?>" alt="boutton play" class="play">
                 <img src="<?= asset('images/pause.png') ?>" alt="boutton pause" class="pause">
             </div>
-
-
         </div>
     </div>
 
 
+    //* NAV BAR POST-CLICK //
 
-
-
-    <!--NAV BAR POST CLICK-->
     <div class="nav-bar-postclick">
-
 
         <div class="profil">
             <a href="#profil-description">
@@ -51,8 +49,8 @@
             <a href="#profil-description">
                 <h2 class="titres-navbar-postclick">PROFIL</h2>
             </a>
-
         </div>
+
         <div class="compétences">
             <a href="#compétences-main">
                 <img src="<?= asset('images/compétences modif.png') ?>" alt="image de compétences" class="compétences-img">
@@ -60,8 +58,8 @@
             <a href="#compétences-main">
                 <h2 class="titres-navbar-postclick">COMPETENCES</h2>
             </a>
-
         </div>
+
         <div class="portfolio">
             <a href="#portfolio-main">
                 <img src=" <?= asset('images/portfolio modif.png') ?>" alt="image de portfolio" class="portfolio-img">
@@ -70,6 +68,7 @@
                 <h2 class="titres-navbar-postclick">PORTFOLIO</h2>
             </a>
         </div>
+
         <div class="projets-futurs">
             <a href="#projets-futurs-main">
                 <img src=" <?= asset('images/projets futurs modif.png') ?>" alt="image de forge" class="projets-futurs-img">
@@ -77,8 +76,8 @@
             <a href="#projets-futurs-main">
                 <h2 class="titres-navbar-postclick">PROJETS FUTURS</h2>
             </a>
-
         </div>
+
         <div class="contact">
             <a href="#footer">
                 <img src=" <?= asset('images/contact modif.png') ?>" alt="image de parchemin" class="contact-img">
@@ -86,31 +85,27 @@
             <a href="#footer">
                 <h2 class="titres-navbar-postclick">Contact</h2>
             </a>
-
-
         </div>
+
     </div>
-
-
     <div class="identité">
         <div class="partie-gauche">
             <h1>CLEMENT JOULIN</h1>
             <h2 class="dev-text">DEVELOPPEUR WEB JUNIOR <br> EN RECHERCHE DE STAGE</h2>
         </div>
-
         <div class="partie-droite">
             <img src="<?= asset('images/avatar 2 pixel art-fococlipping-standard.png') ?>" alt="image de moi pixel art" class="avatar">
         </div>
-
-
     </div>
 
 </header>
 
-<!--PROFIL-->
+//* PROFILE //
+
 <main>
 
     <div id="profil-description">
+
         <div class="profil-gauche">
             <h1>SALUTATIONS</h1>
             <p class="profil-bio">Je me nomme Clément Joulin, 29 ans et passionné par la création sous bien des formes : <br>
@@ -128,13 +123,10 @@
                 celle du développement web. Dans le cadre de cette dernière, je suis actuellement à la recherche d’un <br>
                 stage afin de développer mes compétences.
             </p>
-
             <div class="cv-pdf">
                 <a href="./CV.pdf" download="CV.pdf" target="_blank"><img src="<?= asset('images/pdf1.png" alt="image de pdf') ?>" class="pdf"></a>
                 <h1 class="cv-text">CV</h1>
             </div>
-
-
         </div>
 
 
@@ -148,7 +140,6 @@
                         d’autres mécaniques de jeux. Ma préférence allant tout de même <br>
                         aux rpg, jeux de cartes et plateformer.</p>
                 </div>
-
             </div>
             <div class="écriture">
                 <img src="<?= asset('images/écriture modif.png') ?>" data-src="<?= asset('Musiques/write.mp3'); ?>" alt="image de crayon" class="écriture-img">
@@ -161,7 +152,6 @@
                         fantasy en parallèle du roman et du jeu de rôle dont ils sont <br>tirés.
                     </p>
                 </div>
-
             </div>
             <div class="musique">
                 <img src="<?= asset('images/musique modif.png') ?>" data-src="<?= asset('Musiques/slap.flac'); ?>" alt="image de basse" class="musique-img">
@@ -173,47 +163,35 @@
                         une chaîne youtube où nous postons nos créations.
                     </p>
                 </div>
-
             </div>
-
-
         </div>
-
-
-
-
 
     </div>
 
-    <!--COMPETENCES-->
+    //* SKILLS //
 
     <div id="compétences-main">
         <?php foreach ($skills as $skill) : ?>
             <?php if ($skill->getImage()) : ?>
-
                 <img src='<?= asset("images/" . $skill->getImage()); ?>' class="logo">
-
             <?php endif; ?>
             <?php if ($skill->getContent()) : ?>
                 <h3><?= $skill->getContent(); ?></h3>
             <?php endif; ?>
-
-
         <?php endforeach ?>
     </div>
 
 
-    <!--PORTFOLIO-->
+    //* PORTFOLIO //
 
     <article>
 
         <div id="portfolio-main">
             <h1>PORTFOLIO</h1>
-
             <div class="portfolio-block">
                 <?php foreach ($portfolios as $portfolio) : ?>
-
                     <div class="ensemble-portfolio">
+                        <div class="category"><?= $portfolio->getCategoryName() ?></div>
                         <img src="<?= asset('images/' . $portfolio->getImage()) ?>" class="portfolio-main-img">
                         <div class="ensemble-non-img">
                             <p class="portfolio-txt"><?= $portfolio->getContent() ?></p>
@@ -222,25 +200,21 @@
                                     <img src="<?= asset('images/souris modif.png') ?>" alt="image de souris" class="souris">
                                     <p class="portfolio-txt">Cliquez ici pour voir les commentaires</p>
                                 </div>
-
                             </a>
                         </div>
                     </div>
-
-
                 <?php endforeach ?>
             </div>
         </div>
 
     </article>
 
-    <!--PROJETS FUTURS-->
+    //* FUTURE PROJECTS //
 
     <div id="projets-futurs-main">
+
         <h1>PROJETS FUTURS</h1>
-
         <div class="projets-futurs-block">
-
             <div class="site-web-projet">
                 <img src="<?= asset('images/site web.png') ?>" alt="image de site web" class="projet-img">
                 <p>Un site web présentant mon univers de fiction et recensant tous ses médias : <br>
@@ -250,27 +224,17 @@
                 <a href="https://discord.gg/pdumPFYA" target="_blank">
                     <img src="<?= asset('images/discord.png') ?>" alt="image de discord" class="projet-discord">
                 </a>
-
-
-
             </div>
-
             <div class="jeu-vidéo-projet">
                 <img src="<?= asset('images/jeu plateforme.png') ?>" alt="jeu de plateforme" class="projet-img">
                 <p>Un jeu vidéo plateformer rpg basé sur mon univers médiéval fantasy où on <br>
                     incarnera le protagoniste de mon roman dans ses plus jeunes années.</p>
-
             </div>
-
-
-
-
         </div>
-
 
     </div>
 
-    <!--API-->
+    //* API //
 
     <div class="api">
         <p>Vous êtes passé niveau 2 ! Cliquez sur le coffre pour recevoir votre récompense !</p>
@@ -283,13 +247,11 @@
             <h2 class="rarity-item"></h2>
             <h2 class="slot-item"></h2>
         </div>
-
-
     </div>
-
 
 </main>
 
+//* FOOTER //
 
 <footer>
 
@@ -307,11 +269,6 @@
             <img src="<?= asset('images/discord.png') ?>" alt="logo discord" class="logo-footer">
             <p>Kanzan-acolyte pentacolore#7807</p>
         </div>
-
-
-
-
-
     </div>
     <a href="<?= constructUrl('mentionsLegales'); ?>" target="_blank">
         <p class="mentions-text">Mentions légales</p>
@@ -319,10 +276,10 @@
 
 </footer>
 
-
+//* ARROW //
 
 <div class="flèche-statique">
     <a href="#nav-bar"> <img src="<?= asset('images/flèche du haut.png') ?>" alt="image de flèche vers le bas">
     </a>
-
     <script src="<?= asset("js/app.js") ?>"></script>
+</div>

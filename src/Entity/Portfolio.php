@@ -8,6 +8,7 @@ class Portfolio
     private int $id;
     private string $image;
     private string $content;
+    private Category $category;
 
     public function __construct(array $data = [])
     {
@@ -71,5 +72,28 @@ class Portfolio
         $this->content = $content;
 
         return $this;
+    }
+
+    /**
+     * Get the value of category
+     */
+    public function getCategory(): Category
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set the value of category
+     */
+    public function setCategory(Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCategoryName(): string
+    {
+        return $this->category->getName();
     }
 }

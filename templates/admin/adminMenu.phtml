@@ -93,6 +93,14 @@
             <h2>Ajouter un portfolio</h2>
             <form action="<?= constructUrl('adminMenu') ?>" enctype="multipart/form-data" method="POST">
                 <div class="form-div">
+                    <div class="form-group">
+                        <label for="category">Catégorie :</label>
+                        <select name="category" id="category">
+                            <?php foreach ($categories as $category) : ?>
+                                <option value="<?= intval($category->getIdCategory()); ?>"><?= htmlspecialchars($category->getName()) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
 
                     <div class="form-group">
 

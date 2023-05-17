@@ -3,7 +3,7 @@
 
         <div id="admin-skill-box">
 
-            <div class="admin-box">
+            <div class="admin-box-update">
                 <h2>Modifier une compétence</h2>
                 <form action="<?= constructUrl('updateSkillsAndPortfolios', ['skill' => $skill->getId()]); ?>" enctype="multipart/form-data" method="POST">
                     <div class="form-div">
@@ -11,7 +11,7 @@
                         <div class="form-group">
 
                             <?php if ($skill->getImage()) : ?>
-                                <label for="imageSkill" class="connexion-text">Votre image</label>
+
                                 <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
                                 <img src="<?= asset('images/' . $skill->getImage()) ?>" class="portfolio-main-img">
                                 <input type="file" class="form-control" id="imageSkill" name="imageSkill" aria-describedby="emailHelp">
@@ -27,7 +27,6 @@
                         <div class="form-group">
 
                             <?php if ($skill->getContent()) : ?>
-                                <label for="exampleInputText1" class="connexion-text">Votre texte</label>
                                 <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
                                 <h3><?= $skill->getContent(); ?></h3>
                             <?php endif ?>
@@ -53,24 +52,28 @@
 
     <?php } elseif ($_GET['portfolio']) { ?>
 
+        <div id="admin-portfolio-box">
 
-
-        <div id="admin-porfolio-box">
-
-            <div class="admin-box">
+            <div class="admin-box-update">
                 <h2>Modifier un portfolio</h2>
                 <form action="<?= constructUrl('updateSkillsAndPortfolios', ['portfolio' => $portfolio->getId()]); ?>" enctype="multipart/form-data" method="POST">
                     <div class="form-div">
-
+                        <div class="form-group">
+                            <label for="category">Catégorie :</label>
+                            <select name="category" id="category">
+                                <?php foreach ($categories as $category) : ?>
+                                    <option value="<?= intval($category->getIdCategory()); ?>"><?= htmlspecialchars($category->getName()) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
 
                         <div class="form-group">
 
-
-                            <label for="imagePortfolio" class="connexion-text">Votre image</label>
-                            <input type="hidden" name="<?= $portfolio->getId() ?>" value="<?= $portfolio->getId() ?>">
-                            <img src="<?= asset('images/' . $portfolio->getImage()) ?>" class="portfolio-main-img">
-                            <input type="file" class="form-control" id="imagePortfolio" name="imagePortfolio" aria-describedby="emailHelp">
-
+                            <?php if ($portfolio->getImage()) : ?>
+                                <input type="hidden" name="<?= $portfolio->getId() ?>" value="<?= $portfolio->getId() ?>">
+                                <img src="<?= asset('images/' . $portfolio->getImage()) ?>" class="portfolio-main-img">
+                                <input type="file" class="form-control" id="imagePortfolio" name="imagePortfolio" aria-describedby="emailHelp">
+                            <?php endif ?>
                             <?php if (isset($errors['imagePortfolio'])) : ?>
                                 <small class="text-errors"><?= $errors["imagePortfolio"] ?></small>
                             <?php endif ?>
@@ -82,18 +85,17 @@
                         <div class="form-group">
 
                             <?php if ($portfolio->getContent()) : ?>
-                                <label for="exampleInputText1" class="connexion-text">Votre texte</label>
                                 <input type="hidden" name="<?= $portfolio->getId() ?>" value="<?= $portfolio->getId() ?>">
-                                <h3><?= $portfolio->getContent(); ?></h3>
+                                <h3 class="content-portfolio"><?= $portfolio->getContent(); ?></h3>
                             <?php endif ?>
-                            <textarea type="text" class="form-control" id="exampleInputText1" name="contentPortfolio" aria-describedby="PseudoHelp" placeholder="La compétence" value="<?= $content ?>"></textarea>
+                            <textarea type="text" class="form-control" id="exampleInputText1" name="contentPortfolio" aria-describedby="PseudoHelp" placeholder="Le contenu" value="<?= $content ?>"></textarea>
                             <?php if (isset($errors['contentPortfolio'])) : ?>
                                 <small class="text-errors"><?= $errors['contentPortfolio'] ?></small>
                             <?php endif ?>
                         </div>
 
 
-                        <button type="submit" class="btn btn-primary" name="updateSubmitPortfolio<?= $portfolio->getId() ?>" value="submit">Modfier</button>
+                        <button type="submit" class="btn btn-primary" name="updateSubmitSkill<?= $portfolio->getId() ?>" value="submit">Modfier</button>
 
 
                         </a>
@@ -104,13 +106,9 @@
 
 
 
-
-
-
-
-
-
         </div>
+
+
 
 
 

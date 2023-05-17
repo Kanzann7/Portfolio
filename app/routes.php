@@ -27,11 +27,6 @@ $routes = [
         'controller' => 'AuthController',
         'method' => 'logout'
     ],
-    'adminLogin' => [
-        'path' => '/adminLogin',
-        'controller' => 'Admin\\AdminLoginController',
-        'method' => 'index'
-    ],
     'adminMenu' => [
         'path' => '/adminMenu',
         'controller' => 'Admin\\AdminMenuController',

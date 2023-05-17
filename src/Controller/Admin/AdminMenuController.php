@@ -2,10 +2,11 @@
 
 namespace App\Controller\Admin;
 
-use App\Model\PortfolioModel;
-use App\Model\SkillModel;
 use App\Model\UserModel;
+use App\Model\SkillModel;
+use App\Model\CategoryModel;
 use App\Service\UserSession;
+use App\Model\PortfolioModel;
 
 class AdminMenuController
 {
@@ -142,12 +143,17 @@ class AdminMenuController
         $contentPortfolio = '';
         $portfolioModel = new PortfolioModel();
         $portfolios = $portfolioModel->getAllPortfolio();
+        $categoryModel = new CategoryModel();
+        $categories = $categoryModel->getAllCategories();
 
         /* ADD PORTFOLIOS */
 
         if (isset($_POST['addSubmitPortfolio'])) {
 
             $contentPortfolio = trim($_POST['contentPortfolio']);
+            $categoryId = (int) $_POST['category'];
+            // $category = $categoryModel->getCategoryById($categoryId);
+
 
             $errors = validatePortfolioForm($imagePortfolio, $contentPortfolio);
 
@@ -178,7 +184,8 @@ class AdminMenuController
 
                     move_uploaded_file($_FILES['imagePortfolio']['tmp_name'], 'images/' . $filename);
                 }
-                $portfolioModel->addPortfolio($filename, $contentPortfolio);
+
+                $portfolioModel->addPortfolio($filename, $contentPortfolio, $categoryId);
                 $_SESSION['flash'] = 'Portfolio ajouté !';
                 header('Location: ' . constructUrl('adminMenu'));
                 exit;
@@ -270,8 +277,6 @@ class AdminMenuController
                 }
             }
         }
-        // dump($skill);
-        // exit;
 
 
 
@@ -283,13 +288,15 @@ class AdminMenuController
             $imagePortfolio = '';
             $contentPortfolio = '';
             $portfolioModel = new PortfolioModel();
+            $categoryModel = new CategoryModel();
+            $categories = $categoryModel->getAllCategories();
 
             $portfolio = $portfolioModel->getOnePortfolio($_GET["portfolio"]);
 
             if (isset($_POST['updateSubmitPortfolio' . $portfolio->getId()])) {
 
+                $categoryId = (int) $_POST['category'];
                 $contentPortfolio = trim($_POST['contentPortfolio']);
-
                 $errors = $this->validateSkillForm($imagePortfolio, $contentPortfolio);
 
 
@@ -319,7 +326,7 @@ class AdminMenuController
 
                         move_uploaded_file($_FILES['imagePortfolio']['tmp_name'], 'images/' . $filename);
                     }
-                    $skillModel->updateSkill($filename, $contentPortfolio, $portfolio->getId());
+                    $portfolioModel->updatePortfolio($filename, $contentPortfolio, $categoryId, $portfolio->getId());
                     $_SESSION['flash'] = 'Portfolio modifié !';
                     header('Location: ' . constructUrl('updateSkillsAndPortfolios', ['portfolio' => $portfolio->getId()]));
                     exit;
