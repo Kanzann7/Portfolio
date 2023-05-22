@@ -1,4 +1,4 @@
-//* CONNEXION MENU //
+<!-- //* CONNEXION MENU // -->
 
 <header>
     <div id="pre-nav">
@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    //* RETURN TON HOME PAGE //
+    <!-- //* RETURN TON HOME PAGE // -->
     <div id="nav-bar">
         <div class="sauf-menu">
             <a href="<?= constructUrl('home'); ?>">
@@ -32,7 +32,7 @@
 
     </div>
 
-    // * VIEW COMMENTS //
+    <!-- //* VIEW COMMENTS */ -->
 
     <article class="comments">
 
@@ -49,7 +49,7 @@
 
         </div>
 
-        //* ADD COMMENTS //
+        <!-- //* ADD COMMENTS // -->
 
         <?php if ((new App\Service\UserSession())->getUser()) : ?>
 
@@ -71,7 +71,7 @@
             </form>
 
 
-            //* IF NOT CONNECTED //
+            <!-- //* IF NOT CONNECTED // -->
 
         <?php else : ?>
             <p class="flash-message"> Veuillez vous connecter pour poster un commentaire </p>

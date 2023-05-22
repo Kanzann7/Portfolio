@@ -1,4 +1,4 @@
-//* MENU CONNEXION //
+<!-- //* MENU CONNEXION // -->
 
 <header>
     <div id="pre-nav">
@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    //* NAV BAR VISIBLE //
+    <!-- //* NAV BAR VISIBLE // -->
 
     <div id="nav-bar">
         <div class="sauf-menu">
@@ -31,14 +31,19 @@
         <div class="menu">
             <h1 class="menu-titre">MENU</h1>
             <div class="buttons">
-                <img src="<?= asset('images/play.png') ?>" data-src="<?= asset('Musiques/menu.wav'); ?>" alt="boutton play" class="play">
-                <img src="<?= asset('images/pause.png') ?>" alt="boutton pause" class="pause">
+                <div class="button-play">
+                    <img src="<?= asset('images/play.png') ?>" data-src="<?= asset('Musiques/menu.wav'); ?>" alt="boutton play" class="play">
+                </div>
+                <div hidden class="button-pause">
+                    <img src="<?= asset('images/pause.png') ?>" alt="boutton pause" class="pause">
+                </div>
+
             </div>
         </div>
     </div>
 
 
-    //* NAV BAR POST-CLICK //
+    <!-- //* NAV BAR POST-CLICK // -->
 
     <div class="nav-bar-postclick">
 
@@ -100,7 +105,7 @@
 
 </header>
 
-//* PROFILE //
+<!-- //* PROFILE // -->
 
 <main>
 
@@ -168,7 +173,7 @@
 
     </div>
 
-    //* SKILLS //
+    <!-- //* SKILLS // -->
 
     <div id="compétences-main">
         <?php foreach ($skills as $skill) : ?>
@@ -182,7 +187,7 @@
     </div>
 
 
-    //* PORTFOLIO //
+    <!-- //* PORTFOLIO // -->
 
     <article>
 
@@ -209,7 +214,7 @@
 
     </article>
 
-    //* FUTURE PROJECTS //
+    <!-- //* FUTURE PROJECTS // -->
 
     <div id="projets-futurs-main">
 
@@ -234,7 +239,7 @@
 
     </div>
 
-    //* API //
+    <!-- //* API // -->
 
     <div class="api">
         <p>Vous êtes passé niveau 2 ! Cliquez sur le coffre pour recevoir votre récompense !</p>
@@ -251,7 +256,7 @@
 
 </main>
 
-//* FOOTER //
+<!-- //* FOOTER // -->
 
 <footer>
 
@@ -276,7 +281,7 @@
 
 </footer>
 
-//* ARROW //
+<!-- //* ARROW // -->
 
 <div class="flèche-statique">
     <a href="#nav-bar"> <img src="<?= asset('images/flèche du haut.png') ?>" alt="image de flèche vers le bas">
