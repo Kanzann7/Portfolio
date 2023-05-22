@@ -34,7 +34,7 @@
                 <div class="button-play">
                     <img src="<?= asset('images/play.png') ?>" data-src="<?= asset('Musiques/menu.wav'); ?>" alt="boutton play" class="play">
                 </div>
-                <div hidden class="button-pause">
+                <div class="button-pause">
                     <img src="<?= asset('images/pause.png') ?>" alt="boutton pause" class="pause">
                 </div>
 
@@ -125,11 +125,10 @@
                 D’une curiosité inextinguible, j’apprends chaque jour auprès de mes pairs et par moi-même. <br> <br>
 
                 En formation avec Simplon depuis fin octobre, je me découvre une nouvelle passion et vocation: <br>
-                celle du développement web. Dans le cadre de cette dernière, je suis actuellement à la recherche d’un <br>
-                stage afin de développer mes compétences.
+                celle du développement web.
             </p>
             <div class="cv-pdf">
-                <a href="./CV.pdf" download="CV.pdf" target="_blank"><img src="<?= asset('images/pdf1.png" alt="image de pdf') ?>" class="pdf"></a>
+                <a href="<?= asset('../public/CV.pdf') ?>" download="CV.pdf" target="_blank"><img src="<?= asset('images/pdf1.png'); ?>" alt="image de pdf" class="pdf"></a>
                 <h1 class="cv-text">CV</h1>
             </div>
         </div>
