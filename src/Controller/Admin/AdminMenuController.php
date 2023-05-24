@@ -38,6 +38,31 @@ class AdminMenuController
         return $errors;
     }
 
+    function validatePortfolioForm(string $image, string $content)
+    {
+        $image = false;
+        $errors = [];
+        if (array_key_exists('imagePortfolio', $_FILES) && $_FILES['imagePortfolio']['error'] != UPLOAD_ERR_NO_FILE) {
+            $image = true;
+            $filesize = filesize($_FILES['imagePortfolio']['tmp_name']);
+            if ($filesize > MAX_UPLOAD_SIZE) {
+                $errors['imagePortfolio'] = 'Votre fichier excède 1 Mo.';
+            }
+            $allowedMimeTypes = ['image/jpeg', 'image/gif', 'image/png'];
+            $mimeType = mime_content_type($_FILES['imagePortfolio']['tmp_name']);
+
+            if (!in_array($mimeType, $allowedMimeTypes)) {
+                $errors['imagePortfolio'] = 'Type de fichier non autorisé';
+            }
+        }
+
+        if ((!$image) || empty($content)) {
+            $errors['imagePortfolio'] = 'Veuillez remplir les deux champs !';
+            $errors['contentPortfolio'] = 'Veuillez remplir les deux champs !';
+        }
+        return $errors;
+    }
+
     function index()
     {
 
@@ -104,40 +129,8 @@ class AdminMenuController
         }
 
 
-
-
-
-
-
-
-
-
-
         /* PORTFOLIO */
-        function validatePortfolioForm(string $image, string $content)
-        {
-            $image = false;
-            $errors = [];
-            if (array_key_exists('imagePortfolio', $_FILES) && $_FILES['imagePortfolio']['error'] != UPLOAD_ERR_NO_FILE) {
-                $image = true;
-                $filesize = filesize($_FILES['imagePortfolio']['tmp_name']);
-                if ($filesize > MAX_UPLOAD_SIZE) {
-                    $errors['imagePortfolio'] = 'Votre fichier excède 1 Mo.';
-                }
-                $allowedMimeTypes = ['image/jpeg', 'image/gif', 'image/png'];
-                $mimeType = mime_content_type($_FILES['imagePortfolio']['tmp_name']);
 
-                if (!in_array($mimeType, $allowedMimeTypes)) {
-                    $errors['imagePortfolio'] = 'Type de fichier non autorisé';
-                }
-            }
-
-            if ((!$image) || empty($content)) {
-                $errors['imagePortfolio'] = 'Veuillez remplir les deux champs !';
-                $errors['contentPortfolio'] = 'Veuillez remplir les deux champs !';
-            }
-            return $errors;
-        }
 
         $imagePortfolio = '';
         $contentPortfolio = '';
@@ -152,10 +145,10 @@ class AdminMenuController
 
             $contentPortfolio = trim($_POST['contentPortfolio']);
             $categoryId = (int) $_POST['category'];
-            // $category = $categoryModel->getCategoryById($categoryId);
 
 
-            $errors = validatePortfolioForm($imagePortfolio, $contentPortfolio);
+
+            $errors = $this->validatePortfolioForm($imagePortfolio, $contentPortfolio);
 
 
 
@@ -204,13 +197,6 @@ class AdminMenuController
         }
 
 
-
-
-
-
-
-
-
         if (isset($_SESSION['flash'])) {
             $message =  $_SESSION['flash'];
             $_SESSION['flash'] = null;
@@ -244,8 +230,6 @@ class AdminMenuController
                 $errors = $this->validateSkillForm($imageSkill, $contentSkill);
 
 
-
-
                 if (empty($errors)) {
 
 
@@ -272,7 +256,7 @@ class AdminMenuController
                     }
                     $skillModel->updateSkill($filename, $contentSkill, $skill->getId());
                     $_SESSION['flash'] = 'Compétence modifiée !';
-                    header('Location: ' . constructUrl('updateSkillsAndPortfolios', ['skill' => $skill->getId()]));
+                    header('Location: ' . constructUrl('adminMenu'));
                     exit;
                 }
             }
@@ -297,8 +281,7 @@ class AdminMenuController
 
                 $categoryId = (int) $_POST['category'];
                 $contentPortfolio = trim($_POST['contentPortfolio']);
-                $errors = $this->validateSkillForm($imagePortfolio, $contentPortfolio);
-
+                $errors = $this->validatePortfolioForm($imagePortfolio, $contentPortfolio);
 
 
 
@@ -328,22 +311,17 @@ class AdminMenuController
                     }
                     $portfolioModel->updatePortfolio($filename, $contentPortfolio, $categoryId, $portfolio->getId());
                     $_SESSION['flash'] = 'Portfolio modifié !';
-                    header('Location: ' . constructUrl('updateSkillsAndPortfolios', ['portfolio' => $portfolio->getId()]));
+                    header('Location: ' . constructUrl('adminMenu'));
                     exit;
                 }
             }
         }
 
 
-
-
-
         if (isset($_SESSION['flash'])) {
             $message =  $_SESSION['flash'];
             $_SESSION['flash'] = null;
         }
-
-
 
         $template = "updateSkillsAndPortfolios";
         include TEMPLATE_DIR . "/admin/baseAdmin.phtml";

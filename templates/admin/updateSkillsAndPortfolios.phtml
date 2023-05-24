@@ -15,12 +15,14 @@
 
                         <div class="form-group">
 
-                            <?php if ($skill->getImage()) : ?>
 
-                                <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
+
+                            <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
+                            <?php if ($skill->getImage()) : ?>
                                 <img src="<?= asset('images/' . $skill->getImage()) ?>" class="portfolio-main-img">
-                                <input type="file" class="form-control" id="imageSkill" name="imageSkill" aria-describedby="emailHelp">
                             <?php endif ?>
+                            <input type="file" class="form-control" id="imageSkill" name="imageSkill" aria-describedby="emailHelp">
+
                             <?php if (isset($errors['imageSkill'])) : ?>
                                 <small class="text-errors"><?= $errors["imageSkill"] ?></small>
                             <?php endif ?>
@@ -42,7 +44,7 @@
                         </div>
 
 
-                        <button type="submit" class="btn btn-primary" name="updateSubmitSkill<?= $skill->getId() ?>" value="submit">Modfier</button>
+                        <button type="submit" class="btn btn-primary" name="updateSubmitSkill<?= $skill->getId() ?>" value="submit">Modifier</button>
 
 
                         </a>
@@ -103,7 +105,7 @@
                         </div>
 
 
-                        <button type="submit" class="btn btn-primary" name="updateSubmitSkill<?= $portfolio->getId() ?>" value="submit">Modfier</button>
+                        <button type="submit" class="btn btn-primary" name="updateSubmitPortfolio<?= $portfolio->getId() ?>" value="submit">Modifier</button>
 
 
                         </a>
