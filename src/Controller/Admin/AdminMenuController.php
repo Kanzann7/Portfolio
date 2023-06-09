@@ -93,17 +93,17 @@ class AdminMenuController
 
                 if (array_key_exists('imageSkill', $_FILES) && $_FILES['imageSkill']['error'] != UPLOAD_ERR_NO_FILE) {
 
-                    // Nettoyer le nom du fichier
                     $extension = pathinfo($_FILES['imageSkill']['name'], PATHINFO_EXTENSION);
                     $basename = pathinfo($_FILES['imageSkill']['name'], PATHINFO_FILENAME);
 
-                    // Slugification du nom du fichier (on supprime caractères spéciaux, accents, majuscules, espaces, etc)
+
+                    // Clean filename
                     $basename = slugify($basename);
 
-                    // On ajoute une chaîne aléatoire pour éviter les conflits
+                    // Add random strings to avoid conflicts
                     $filename = $basename . sha1(uniqid(rand(), true)) . '.' . $extension;
 
-                    // Copier le fichier temporaire dans notre dossier "images"
+                    // Copy temporary file in folder images
                     if (!file_exists('images')) {
                         mkdir('images');
                     }

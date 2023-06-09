@@ -13,15 +13,15 @@ class AuthController
         $errors = null;
         $email = "";
         $pseudo = '';
-        // Si le formulaire est soumis...
+        // If form is submit
         if (!empty($_POST)) {
 
-            // Récupération des données du formulaire
+            // Recover data form
             $pseudo = strip_tags(trim($_POST['pseudo']));
             $email = strip_tags(trim($_POST['email']));
             $password = $_POST['password'];
 
-            // 1. Est-ce que les identifiants sont corrects ?
+            //  Check if credentials are correct
             $user = $this->checkCredentials($email, $pseudo, $password);
 
 
@@ -29,23 +29,23 @@ class AuthController
                 $errors = 'Identifiants incorrects';
             }
 
-            // Identifiants corrects
+            // If credentials are correct
             else {
 
-                // 2. Enregistrer l'utilisateur en session
+                // 2. Register user in session
                 $userSession = new UserSession();
                 $userSession->register($user);
 
                 // Message flash de succès
                 $_SESSION['flash'] = 'Content de te revoir ' . $user->getPseudo();
 
-                // Redirection vers la page d'accueil
+                // Redirect to the home page
                 header('Location: ' . constructUrl('home'));
                 exit;
             }
         }
 
-        // Affichage du template
+        // Display template
         $template = 'login';
         include TEMPLATE_DIR . '/base.phtml';
     }
@@ -72,10 +72,10 @@ class AuthController
 
     public function logout()
     {
-        // On efface les données enregistrées en session
+        // Delete data recorded in session
         $_SESSION['user'] = null;
 
-        // Message flash
+        // Flash message
         $_SESSION['flash'] = 'Vous vous êtes bien déconnecté .';
 
         // redirection

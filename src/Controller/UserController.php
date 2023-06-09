@@ -20,17 +20,16 @@ class UserController
     {
         $pseudo = '';
         $email = '';
-
-        // Si le formulaire est soumis
+        // If form is submit
         if (!empty($_POST)) {
 
-            // 1. Récupération des données du formulaire
+            // Recover data form
             $pseudo = strip_tags(trim($_POST['pseudo']));
             $email = strip_tags(trim($_POST['email']));
             $password = $_POST['password'];
             $passwordConfirm = $_POST['password-confirm'];
 
-            // 2. Validation du formulaire
+            // Form validation
             $errors = $this->validateForm(
                 $pseudo,
                 $email,
@@ -38,7 +37,7 @@ class UserController
                 $passwordConfirm
             );
 
-            // Si il n'y a pas d'erreur... 
+            // If no errors
             if (empty($errors)) {
 
                 $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -50,21 +49,15 @@ class UserController
                     'role' => UserRole::USER
                 ]);
 
-
-
                 $this->userModel->addUser($user);
-
-
-                // Ajout d'un message flash en session
+                // Add flash message
                 $_SESSION['flash'] = 'Votre compte a été créé avec succès.';
-
-
                 header('Location: ' . constructUrl('home'));
                 exit;
             }
         }
 
-        // Affichage du template
+        // Display flash message
         $template = 'inscription';
         include TEMPLATE_DIR . '/base.phtml';
     }
@@ -75,15 +68,15 @@ class UserController
         string $password,
         string $passwordConfirm
     ) {
-        // On initialise un tableau, on stockera les messages d'erreur dedans
+        // Initialize an array to store errors
         $errors = [];
 
-        // Si le champ "firstname" n'est pas rempli...
+        // If the field "pseudo" is empty
         if (!$pseudo) {
             $errors['pseudo'] = 'Veuillez remplir le champ "Pseudo"';
         }
 
-        // Validation de l'email
+        // Email validation
         if (!$email) {
             $errors['email'] = 'Veuillez remplir le champ "Email"';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -98,7 +91,7 @@ class UserController
             $errors['password-confirm'] = 'La confirmation ne correspond pas';
         }
 
-        // On retourne le tableau d'erreurs
+        // Return array of errors
         return $errors;
     }
 }

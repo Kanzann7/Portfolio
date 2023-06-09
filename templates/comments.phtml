@@ -41,7 +41,7 @@
 
                 <img src="<?= asset('images/' . $portfolioId->getImage()) ?>" class="portfolio-main-img">
                 <div class="ensemble-non-img">
-                    <p class="portfolio-txt"><?= $portfolioId->getContent() ?></p>
+                    <p class="portfolio-txt"><?= htmlspecialchars($portfolioId->getContent())  ?></p>
                 </div>
             </div>
 
@@ -80,7 +80,7 @@
         <?php foreach ($comments as $comment) : ?>
             <div class="portfolio-txt">
                 <h2><?= $comment->getUser()->getPseudo(); ?> le <?= $comment->getFormattedCreatedAt() ?></h2>
-                <p><?= $comment->getContent(); ?></p>
+                <p><?= htmlspecialchars($comment->getContent()); ?></p>
             </div>
         <?php endforeach ?>
 

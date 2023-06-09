@@ -20,7 +20,7 @@
 
     <!-- //* NAV BAR VISIBLE // -->
 
-    <div id="nav-bar">
+    <nav id="nav-bar">
         <div class="sauf-menu">
             <h1>BIENVENUE</h1>
             <div id="div-d10">
@@ -40,66 +40,56 @@
 
             </div>
         </div>
-    </div>
+    </nav>
 
 
     <!-- //* NAV BAR POST-CLICK // -->
 
-    <div class="nav-bar-postclick">
+    <nav class="nav-bar-postclick">
 
         <div class="profil box-title-nav">
             <a href="#profil-description">
                 <img src="<?= asset('images/profil modif.png') ?>" alt="image de profil" class="profil-img">
             </a>
-            <a href="#profil-description">
-                <h2 class="titres-navbar-postclick">PROFIL</h2>
-            </a>
+            <h2 class="titres-navbar-postclick">PROFIL</h2>
         </div>
 
         <div class="skills box-title-nav">
             <a href="#compétences-main">
                 <img src="<?= asset('images/compétences modif.png') ?>" alt="image de compétences" class="compétences-img">
             </a>
-            <a href="#compétences-main">
-                <h2 class="titres-navbar-postclick">COMPETENCES</h2>
-            </a>
+            <h2 class="titres-navbar-postclick">COMPETENCES</h2>
         </div>
 
         <div class="portfolio box-title-nav">
             <a href="#portfolio-main">
                 <img src=" <?= asset('images/portfolio modif.png') ?>" alt="image de portfolio" class="portfolio-img">
             </a>
-            <a href="#portfolio-main">
-                <h2 class="titres-navbar-postclick">PORTFOLIO</h2>
-            </a>
+            <h2 class="titres-navbar-postclick">PORTFOLIO</h2>
         </div>
 
         <div class="projets-futurs box-title-nav">
             <a href="#projets-futurs-main">
                 <img src=" <?= asset('images/projets futurs modif.png') ?>" alt="image de forge" class="projets-futurs-img">
             </a>
-            <a href="#projets-futurs-main">
-                <h2 class="titres-navbar-postclick">PROJETS FUTURS</h2>
-            </a>
+            <h2 class="titres-navbar-postclick">PROJETS FUTURS</h2>
         </div>
 
         <div class="contact box-title-nav">
             <a href="#footer">
                 <img src=" <?= asset('images/contact modif.png') ?>" alt="image de parchemin" class="contact-img">
             </a>
-            <a href="#footer">
-                <h2 class="titres-navbar-postclick">CONTACT</h2>
-            </a>
+            <h2 class="titres-navbar-postclick">CONTACT</h2>
         </div>
 
-    </div>
+    </nav>
 
     <!-- //* AVATAR ET TITRE // -->
 
     <div class="identité">
         <div class="partie-gauche">
             <h1>CLEMENT JOULIN</h1>
-            <h2 class="dev-text">DEVELOPPEUR WEB JUNIOR <br> EN RECHERCHE DE STAGE</h2>
+            <h2 class="dev-text">DEVELOPPEUR WEB JUNIOR</h2>
         </div>
         <div class="partie-droite">
             <img src="<?= asset('images/avatar 2 pixel art-fococlipping-standard.png') ?>" alt="image de moi pixel art" class="avatar">
@@ -138,8 +128,8 @@
 
 
         <div class="profil-droite">
-            <div class="jeu-vidéo">
-                <img src="<?= asset('images/jeu vidéo modif.png') ?>" data-src="<?= asset('Musiques/manette.ogg'); ?>" alt="image de manette" class="jeu-vidéo-img">
+            <div class="video-game">
+                <img src="<?= asset('images/jeu vidéo modif.png') ?>" data-src="<?= asset('Musiques/manette.ogg'); ?>" alt="image de manette" class="video-game-img">
                 <div class="sauf-manette">
                     <h2>JEU VIDEO</h2>
                     <p>Joueur invétéré sur différentes consoles mais <br>
@@ -148,8 +138,8 @@
                         aux rpg, jeux de cartes et plateformer.</p>
                 </div>
             </div>
-            <div class="écriture">
-                <img src="<?= asset('images/écriture modif.png') ?>" data-src="<?= asset('Musiques/write.mp3'); ?>" alt="image de crayon" class="écriture-img">
+            <div class="writing">
+                <img src="<?= asset('images/écriture modif.png') ?>" data-src="<?= asset('Musiques/write.mp3'); ?>" alt="image de crayon" class="writing-img">
                 <div class="sauf-crayon">
                     <h2>ECRITURE</h2>
                     <p> Auteur de deux livres publiés, je ne cesse d’élaborer divers <br>
@@ -232,7 +222,7 @@
                     <img src="<?= asset('images/discord.png') ?>" alt="image de discord" class="projet-discord">
                 </a>
             </div>
-            <div class="jeu-vidéo-projet">
+            <div class="video-game-projet">
                 <img src="<?= asset('images/jeu plateforme.png') ?>" alt="jeu de plateforme" class="projet-img">
                 <p>Un jeu vidéo plateformer rpg basé sur mon univers médiéval fantasy où on <br>
                     incarnera le protagoniste de mon roman dans ses plus jeunes années.</p>
@@ -246,8 +236,8 @@
     <div class="api">
         <p>Vous êtes passé niveau 2 ! Cliquez sur le coffre pour recevoir votre récompense !</p>
         <h1>RPG ITEMS API</h1>
-        <img src="<?= asset('images/coffre fermé.png') ?>" alt="image de coffre fermé" class="item coffre-fermé">
-        <div class="récompense">
+        <img src="<?= asset('images/coffre fermé.png') ?>" alt="image de coffre fermé" class="item hidden-chest">
+        <div class="reward">
             <img src="<?= asset('images/coffre ouvert.png') ?>" alt="image de coffre ouvert" class="item">
             <h1 class="title-item"></h1>
             <h2 class="type-item"></h2>

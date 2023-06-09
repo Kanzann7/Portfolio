@@ -53,17 +53,6 @@ class SkillModel extends AbstractModel
         $this->db->prepareAndExecute($sql, [$id]);
     }
 
-    // function updateSkill($skill)
-    // {
-    //     $sql = 'UPDATE skills
-    //             SET image = ?,
-    //                 content = ?
-    //             WHERE id = ?';
-    //     $this->db->prepareAndExecute($sql, [$skill->getImage(), $skill->getContent(), $skill->getId()]);
-
-    // }
-
-
     function updateSkill(string $image, string $content, int $id)
     {
         $sql = 'UPDATE skills

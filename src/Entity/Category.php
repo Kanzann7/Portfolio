@@ -8,19 +8,10 @@ class Category
     private int $idCategory;
     private string $name;
 
-    // public function __construct(int $idCategory, string $name)
-    // {
-    //     $this->idCategory = $idCategory;
-    //     $this->name = $name;
-    // }
+
     public function __construct(array $data = [])
     {
-        /**
-         * [
-         *    'idCategory' => 1,
-         *    'name' => 'Ma category'
-         * ]
-         */
+
         foreach ($data as $propertyName => $value) {
             $setter = 'set' . ucfirst($propertyName); // setIdCategory, setName
             if (method_exists($this, $setter)) {

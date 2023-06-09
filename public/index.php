@@ -28,7 +28,7 @@ if (strpos($path, '/admin') === 0) {
 }
 $routes = require '../app/routes.php';
 
-// On crée une constante ROUTES pour avoir accès à nos routes partout
+// Create an constant "ROUTES" to access everywhere
 define('ROUTES', $routes);
 
 $className = null;
@@ -52,7 +52,7 @@ if ($className == null) {
 // Ici j'ai trouvé ma route et le contrôleur qui va avec ! => on inclut le controller
 try {
     $className = "App\\Controller\\$className";
-    $controller = new $className(); // Par exemple pour l'accueil "App\\Controller\\HomeControler"
+    $controller = new $className();
     $controller->$method();
 } catch (Exception $exception) {
     echo $exception->getMessage();

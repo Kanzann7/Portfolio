@@ -44,7 +44,7 @@
                         <?php endif; ?>
                         <?php if ($skill->getContent()) : ?>
                             <input type="hidden" name="<?= $skill->getId() ?>" value="<?= $skill->getId() ?>">
-                            <h3><?= $skill->getContent(); ?></h3>
+                            <h3><?= htmlspecialchars($skill->getContent()); ?></h3>
                         <?php endif; ?>
 
                         <button type="submit" class="btn btn-primary" name="removeSubmitSkill<?= $skill->getId() ?>" value="submit">Supprimer</button>

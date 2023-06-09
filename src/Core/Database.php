@@ -16,7 +16,7 @@ class Database
     private PDO $pdo;
 
     /**
-     * Constructeur
+     * Constructor
      */
     public function __construct()
     {
@@ -24,12 +24,12 @@ class Database
     }
 
     /**
-     * Connexion à la base de données
+     * BDB connexion
      */
     function getPDOConnection()
     {
 
-        // Construction du Data Source Name
+        // Data Source Name construction
         $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST . ';charset=utf8';
 
         // Tableau d'options pour la connexion PDO
@@ -38,7 +38,7 @@ class Database
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ];
 
-        // Création de la connexion PDO (création d'un objet PDO)
+        //  PDO connexion (PDO object)
         $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
         $pdo->exec('SET NAMES UTF8');
 
@@ -46,7 +46,7 @@ class Database
     }
 
     /**
-     * Prépare et exécute une requête SL
+     * Prepare and execute  a SQL request
      */
     function prepareAndExecute(string $sql, array $values = [])
     {
@@ -55,7 +55,7 @@ class Database
         return $pdoStatement;
     }
 
-    // Execute une requête de sélection et retourne un résultat
+    // Execute a selection request and return a result
     function getOneResult(string $sql, array $values = [])
     {
         $pdoStatement = $this->prepareAndExecute($sql, $values);
@@ -63,7 +63,7 @@ class Database
         return $result;
     }
 
-    // Execute une requête de sélection et retourne tous les résultats
+    // Execute a selection request and return all results
     function getAllResults(string $sql, array $values = [])
     {
         $pdoStatement = $this->prepareAndExecute($sql, $values);
