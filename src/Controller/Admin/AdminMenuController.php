@@ -292,17 +292,17 @@ class AdminMenuController
 
                     if (array_key_exists('imagePortfolio', $_FILES) && $_FILES['imagePortfolio']['error'] != UPLOAD_ERR_NO_FILE) {
 
-                        // Nettoyer le nom du fichier
+                        // Clean filename
                         $extension = pathinfo($_FILES['imagePortfolio']['name'], PATHINFO_EXTENSION);
                         $basename = pathinfo($_FILES['imagePortfolio']['name'], PATHINFO_FILENAME);
 
-                        // Slugification du nom du fichier (on supprime caractères spéciaux, accents, majuscules, espaces, etc)
+                        // Filename 's slugification
                         $basename = slugify($basename);
 
-                        // On ajoute une chaîne aléatoire pour éviter les conflits
+                        // Add random string to avoid conflict
                         $filename = $basename . sha1(uniqid(rand(), true)) . '.' . $extension;
 
-                        // Copier le fichier temporaire dans notre dossier "images"
+                        //Copy temporary file in "images" folder
                         if (!file_exists('images')) {
                             mkdir('images');
                         }
